@@ -1,0 +1,2 @@
+# mapclass
+GAP package mapclass
