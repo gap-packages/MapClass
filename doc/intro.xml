@@ -1,0 +1,10 @@
+<!-- $Id: intro.xml,v 1.13 2007/10/04 22:02:12 gap Exp $ -->
+
+<Chapter Label="ch:intro"><Heading>Introduction</Heading>
+    This chapter gives an overview of the main functions and data structures
+    implemented by the package and a brief overview of the mathematical
+    motivation. The MAPCLASS package is based on the Braid Package for braid
+    orbit computation.
+    
+</Chapter>
+

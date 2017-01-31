@@ -1,0 +1,627 @@
+<!-- $Id: intro.xml,v 1.13 2007/10/04 22:02:12 gap Exp $ -->
+<Chapter Label="ch:intro"><Heading>Introduction and Main Functions</Heading>
+
+    This chapter provides an overview of the background material, and provides
+    documentation for the main functions and data structures of the MapClass
+    package.
+
+
+    <Section Label="sec:background"><Heading>Background Material</Heading>
+        <Index >Overview</Index>
+
+        Let <M>G</M> be a finite group, let <M>C_1,\ldots, C_r</M> be a
+        collection of conjugacy classes in <M>G</M>. Let <M>\mathcal{E} = 
+            \mathcal{E}(G,g,(C_1, \dots, C_r))</M> denote the set of all tuples
+        <M> \sigma = (\sigma_1,...,\sigma_{2g+r})\in G^{2g+r}</M> (for natural
+        numbers <M>g</M> and <M>r</M>) of elements in <M>G</M> satisfying the
+        relation
+            
+            <Display> \prod_{i=1}^g [\sigma_i,
+                    \sigma_{g+i}] \prod_{i=1}^r \sigma_{2g+i} = 1
+                    </Display>
+        and such that <M>\sigma_{2g +k} \in C_k</M>. If the tuple also satisfies
+        <M>\langle  \sigma_1, \ldots, \sigma_{2g+r}\rangle = G</M> it is said
+        to be <E>generating</E>.<P /> 
+        
+        One may associate the
+        elements of the tuple <M>\sigma</M> with the standard generators of
+        the fundamental group of a compact connected surface <M>S</M> (genus
+        <M>g</M>, <M>r</M> punctures). The mapping class group of <M>S</M> is
+        naturally isomorphic to <M>Out(\pi_1(S))</M> and so gives rise to   
+        an action on the fundamental group of <M>S</M> modulo inner automorphisms.
+        This action can be transferred to an action on the set <M>\mathcal{E}</M>
+        (up to conjugation in <M>G</M>). The <E>mapping class
+            orbits</E> are the orbits of <M>\mathcal{E}</M> under this action. <P />
+
+        The package can be used to compute the set <M>\mathcal{E}(G, g,
+            (C_1,\ldots,C_r))</M> and the corresponding partition into mapping
+        class orbits for  a given  group <M>G</M> and a set of conjugacy classes
+        <M>(C_1,...,C_r)</M> (although the programs expect a tuple of class
+        representatives). For an example application see Section <Ref
+            Sect="sec:application" />. We call the tuple <M>(g;C_1,...,C_r)</M>
+        the signature. The package is an extension of the <E>Braid</E> package
+        for &GAP;. <P/>
+
+    </Section>
+    <Section Label="mainfunction"><Heading>Overview of Main
+            Functions</Heading>
+        The following are the principal ways for calculating the mapping class
+        orbits for a given signature and group. We require our
+        groups to be permutation groups, and the tuple in question to have length
+        at least two.
+        <ManSection>
+            <Func Name="AllMCOrbits" Arg="group, genus, tuple"/>
+            <Description>
+                This function calculates the orbits for the given group, genus
+                and tuple. This function is a wrapper for the function <Ref
+                    Filt="AllMCOrbitsCore" />, and so can make use of GAP's
+                <Keyword>OptionsStack</Keyword>. The options are described in
+                more detail in the documentation for 
+                <Ref Filt="AllMCOrbitsCore" />. We draw attention to two useful
+                options: the <Code>OutputStyle</Code> and <Code>SaveOrbit</Code>
+                options. The <Code>SaveOrbit</Code> option takes values of
+                either <Keyword>false</Keyword> - in which case the orbit is
+                not saved to a file - or
+                it accepts a string that is the name of a directory
+                in which the routine saves the orbits. See 
+                <Ref Filt="AllMCOrbitsCore" /> for more details on the
+                saving process. 
+
+                The <Code> OutputStyle </Code> option controls the verbosity of
+                the output of the function. It accepts three possible
+                values: 
+                <List>
+                    <Item>
+                        <Code>"silent"</Code> -- the routine prints no output
+                        except in the case of an Error.
+                    </Item>
+                    <Item>
+                        <Code>"single-line"</Code> -- the routine prints output
+                        to a single line. An intermediate output style for those
+                        who want some output but do not want to see all
+                        diagnostic output.
+                    </Item>
+                    <Item>
+                        <Code>"full"</Code> -- the routine provides full
+                        diagnostic output.
+                    </Item>
+                </List>
+
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="AllMCOrbitsCore" Arg="group, genus, tuple,
+                partition, constant"/>
+            <Description>
+                This function calculates the orbits for the given group, genus
+                and tuple, with the <M>r</M> branch points partitioned as in 
+                <A>partition</A>. It uses the given <A>constant</A> to determine how
+                many of the tuples it want to account for before exiting.
+                 This function also make use of GAP's
+                 <Keyword>OptionsStack</Keyword> if one desires to alter how the
+                 algorithm runs. The following options and their defaults are
+                 given below.
+                <Table Align="|r|c|">
+                    <HorLine/>
+                    <Row>
+                        <Item>Option Name</Item><Item>Default Value</Item>
+                    </Row>
+                    <HorLine/>
+                    <Row><Item><Code>MaximumWeight</Code></Item><Item>40
+                    </Item></Row>
+                    <Row><Item><Code>MinimumWeight</Code></Item><Item>20
+                    </Item></Row>
+                    <Row><Item><Code>InitialWeight</Code></Item><Item>20
+                    </Item></Row>
+                    <Row><Item><Code>BumpUp</Code></Item><Item>7</Item></Row>
+                    <Row><Item><Code>KnockDown</Code></Item><Item>7</Item></Row>
+                    <Row><Item><Code>InitialNumberOfRandomTuples
+                    </Code></Item><Item>20</Item></Row>
+                    <Row><Item><Code> SaveOrbit </Code></Item><Item>
+                            <Keyword>false</Keyword>
+                    </Item></Row>
+                    <Row><Item><Code> OutputStyle </Code></Item><Item>
+                            <Keyword>"full"</Keyword>
+                    </Item></Row>
+                    <HorLine/>
+                </Table>
+                
+                When trying to search for orbits it can be the case that
+                the routine struggles to find a small orbit because of the low
+                probability of randomly choosing a tuple in the orbit. To combat
+                this problem the routine does not choose tuples entirely
+                randomly but uses a weighted random selection to increase the
+                probability of selecting tuples appearing in small tuples.
+                To small subgroups of our group we have an associated weight.
+                When a subgroup is generated by a tuple in our orbit
+                frequently then we reduce its weight. Subgroups which do not
+                appear often have their weight increased. The options
+                <Code>MaximumWeight</Code>,
+                <Code>MinimumWeight</Code>,
+                <Code>InitialWeight</Code>,<Code>BumpUp</Code>, and
+                <Code>KnockDown</Code>, control this subgroup weighting.
+                Each option takes positive integer values. They play the
+                following roles in the weighting process:
+                <List>
+                    <Item><Code>MaximumWeight</Code> : The maximum weight that a
+                        subgroup can be.
+                    </Item>
+                    <Item><Code>MinimumWeight</Code> : The minimum weight that a
+                        subgroup can be.
+                    </Item>
+                    <Item><Code>InitialWeight</Code> : The weight that a new
+                        subgroup receives when added to to the list of small
+                        subgroups.
+                    </Item>
+                    <Item><Code>BumpUp</Code> : The amount we increase the
+                        weight of a subgroup by when it does not appear
+                        frequently.
+                    </Item>
+                    <Item><Code>KnockDown</Code> : The amount we decrease the
+                        weight of a subgroup by when it appears too
+                        frequently.
+                    </Item>
+                </List>
+                The default options were chosen experimentally and so it may be
+                beneficial to tune these values for a specific case.<P />
+
+                The option <Code>InitialNumberOfRandomTuples</Code>
+                decides how many tuples the routine collects before trying to
+                see if they are in some pre-existing orbit.<P />
+                
+                The option <Code>SaveOrbit</Code> which is by default
+                <Keyword>false</Keyword> can be set to the name of a directory
+                in which you want to save orbits. This option then saves the
+                orbits to files in the folder with "<File>_name</File>". So for
+                example if you wish to save your orbits into the file
+                <File>_example</File> then you would run
+                <Code>AllMCOrbits(group, genus, tuple:
+                    SaveOrbit:="example");</Code>. The orbits are then saved in
+                orbits which are named numerically. Following on from the above
+                example then the first orbit will be saved as "_example/0".
+
+                The <Code> OutputStyle </Code> option controls the verbosity of
+                the output. It accepts three possible values: 
+                <List>
+                <Item>
+                    <Code>"silent"</Code> - the routine prints no output except in
+                    the case of an Error.
+                </Item>
+                <Item>
+                    <Code>"single-line"</Code> - the routine output to a single
+                    line. An intermediate output style for those who
+                    want some output but do not want to see all
+                    diagnostic output.
+                </Item>
+                <Item>
+                    <Code>"full"</Code> - the routine provides full diagnostic output.
+                </Item>
+                </List>
+
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="GeneratingMCOrbits" Arg="group, genus, tuple" />
+            <Description> 
+                This calculates the orbits for the given arguments.
+                 Unlike the <Ref Filt="AllMCOrbits" /> function,
+                <Code>GeneratingMCOrbits</Code> calculates only those orbits
+                whose tuples generate the whole of our original group.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="GeneratingMCOrbitsCore" Arg="group, genus, tuple,
+                partition, constant" />
+            <Description> 
+                This calculates the orbits for the given arguments.  Unlike the
+                <Ref Filt="AllMCOrbits" /> function,
+                <Code>GeneratingMCOrbitsCore</Code> calculates only those orbits
+                whose tuples generate the whole of our original group. As with
+                <Ref Filt="AllMCOrbitsCore" />, the argument <A>partition</A>
+                must be a partition of the conjugacy classes represented in list
+                form. We also have access to the full value of the options stack
+                as in <Ref Filt="AllMCOrbitsCore" />.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="MappingClassOrbit" Arg="group, genus, principaltuple,
+                partition, tuple"
+                />
+            <Returns> an orbit record for an orbit containing tuple or returns
+                <K>fail</K>
+            </Returns> 
+            <Description> 
+                Calculates the orbit of the <A>tuple</A> with respect
+                to the given <A>group</A>, <A>principaltuple</A> and
+                <A>genus</A>.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="PrepareMinTree" Arg="principaltuple,
+                group, ourR, genus" />
+            <Returns> a record with two keys <Code>MinimizationTree</Code> and
+                <Code>MinimumSet</Code>. If <Code>record</Code> is the returned
+                record then <Code>record.MinimizationTree</Code> is the list
+                encoding the tree used to help minimize tuples. The list <Code>
+                record.MinimumSet</Code> is a list of minimal elements which
+                is also used to speed up tuple minimization. </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="MinimizeTuple" Arg="tuple, minimizationTree, minimumSet,
+                numberOfGenerators"/>
+            <Returns> the minimal tuple in the same orbit of
+                <A>tuple</A>.</Returns>
+            <Description> Take the minimisation data provided by <Ref
+                    Filt="PrepareMinTree" /> and minimizes the given
+                <A>tuple</A>.
+            </Description>
+        </ManSection>
+        <ManSection>
+          <Func Name="EasyMinimizeTuple" Arg="group, genus, tuple" />
+            <Returns> the minimal tuple in the same orbit as
+                <A>tuple</A>.</Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="IsInOrbit" Arg="orbit, tuple" />
+            <Returns><Keyword>True</Keyword> if the <A>tuple</A> lies in the
+                <A>orbit</A>.</Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="FindTupleInOrbit" Arg="orbit, tuple" />
+            <Returns> the index of <A>tuple</A> in <Code>orbit.TupleTable</Code> if in the
+                <A>orbit</A>. If the tuple is not in <A>orbit</A> returns
+                <Keyword>fail</Keyword>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="IsEqualOrbit" Arg="orbit1, orbit2" />
+            <Returns><Keyword>true</Keyword> if the two orbits are equal else
+                returns <Keyword>fail</Keyword>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="SelectTuple" Arg="orbit, index" />
+            <Returns>  the tuple 
+                <Code>orbit.TupleTable[index].tuple</Code>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="NumberGeneratingTuples" Arg="group, partition, tuple,
+              genus" />
+            <Returns> the total number of possible generating tuples for the
+                group and tuple. 
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="TotalNumberTuples" Arg="group, tuple, genus"
+              />
+            <Returns> the total number of tuples we have to account for.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="CalculateTuplePartition" Arg="group, tuple" />
+            <Returns> A partition of <Math>{1,\ldots, r}</Math> where
+              <Math>r</Math> is the length of the tuple.
+            </Returns>
+            <Description>
+              The function returns a partition of <Math>{1,\ldots, r}</Math>
+              such that <M>i</M> and <M>j</M> lie in the same block if and only
+              if the elements <Code>tuple[i]</Code> and <Code>tuple[j]</Code>
+              are member of the same conjugacy class. The program currently
+              requires that the elements of the tuple be ordered such that if
+              <Code>tuple[i]</Code> and <Code>tuple[j]</Code> are in the same
+              conjugacy class with <M>i \le j</M> then so is<Code>tuple[k]</Code>
+              for all <M>i \le k \le j</M>.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="RestoreOrbitFromFile" Arg="n, name [, path]" />
+            <Returns> the n-th orbit record from the project with project
+                <Code>"name"</Code>
+            </Returns>
+            <Description> By default the function searches the current working
+                directory for the saved project folder and searches inside this
+                for the n-th orbit. If no such orbit exists it returns
+                <Keyword>fail</Keyword>. If an optional argument <A>path</A> is
+                provided then it searches this path for a folder with the name
+                specified (note that path expects a <Code>Directory</Code>
+                object). If an orbit exists then it is returned as a record as
+                outlined in the data structure section.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="SaveOrbitToFile" Arg=" orbit, n, name" />
+            <Description>
+                Saves the orbit to filename "<A>n</A>" in the directory
+                <Code>'_name'</Code>. The directory must already exist.
+            </Description>
+        </ManSection>
+    </Section>
+    <Section Label="datastructures"><Heading>Key Data Structures</Heading>
+        Many of the above functions require or return key data structures
+        which we aim to document.
+        <Subsection Label="orbitrecord"><Heading>The Orbit Record</Heading>
+            Many of the functions return or expect an orbit "object". This
+            object is in fact record with the following values:
+            <List>
+                <Item>
+                    <Code>PrincipalFiniteGroup </Code>- the finite group
+                </Item>
+                <Item>
+                    <Code>OurG </Code>- genus
+                </Item>
+                <Item>
+                    <Code>OurR </Code>- length of our primary tuple
+                </Item>
+                <Item>
+                    <Code>OurN </Code>- number of points on which our group
+                    acts
+                </Item>
+                <Item>
+                    <Code>NumberOfGenerators </Code>- 2 <Code>OurG</Code>+
+                    <Code>OurR </Code>
+                </Item>
+                <Item>
+                    <Code>OurFreeGroup </Code>- a free group on
+                    <Code>NumberOfGenerators </Code>letters
+                </Item>
+                <Item>
+                    <Code>AbsGens </Code>- generators for
+                    <Code>OurFreeGroup</Code>
+                </Item> 
+                <Item>
+                    <Code>OurAlpha
+                    </Code> - generators of
+                    <Code>OurFreeGroup</Code>corresponding to the
+                    <M>\alpha_i</M> type loops in the fundamental group ( the
+                    first <M>g</M> elements of <Code>AbsGens</Code>)
+                </Item>
+                <Item>
+                    <Code>OurBeta </Code>- elements of <Code>OurFreeGroup
+                    </Code>corresponding to <M>\beta</M> type loops 
+                </Item>
+                <Item>
+                    <Code>OurGamma </Code>- generators of <Code>OurFreeGroup
+                </Code>corresponding to the loops around branch points
+                </Item>
+                <Item>
+                    <Code>TupleTable </Code>- a table containing all the
+                    tuples in the orbit
+                </Item>
+                <Item><Code>HashLength</Code></Item>
+                <Item><Code>Hash</Code></Item>
+                <Item><Code>PrimeCode</Code></Item>
+                <Item><Code>OurAction</Code></Item>
+                <Item><Code>ActionOnOrbit</Code></Item>
+                <Item><Code>MinimizationTree</Code>- minimization structure</Item>
+                <Item><Code>MinimumSet</Code>- minimizaton structure</Item>
+            </List>
+        </Subsection>
+        <Subsection Label="tupletable">
+            <Heading>The Tuple Table</Heading>
+            The tuple table is a list. Each element of the list is a record with
+            the names, tuple and next. If <Code>orbit</Code> is an orbit object
+            then <Code>orbit.TupleTable[n].tuple</Code> returns the tuple at
+            index <M>n</M> of the tuple table.
+        </Subsection>
+    </Section>
+    <Section><Heading>A Sample Session</Heading>
+        We demonstate how one might use the package.
+        <Log>
+            gap&gt; group:=AlternatingGroup(5);
+            Alt( [ 1 .. 5 ] )
+            gap&gt; tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
+            [ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
+            gap&gt; orbits:=AllMCOrbits(group,1,tuple);;
+
+            Total Number of Tuples: 189120
+
+
+            Collecting 20 random tuples... done
+
+            Cleaning done; 20 random tuples remaining
+
+
+            Orbit 1:
+                                                                                  
+            Length=3072
+            Generating Tuple  =[ (1,2,4,5,3), (1,4,5,2,3), (1,2)(4,5),
+            (1,4)(2,3), (2,5)(3,4) ]
+            Generated subgroup size=60
+            Centralizer size=1
+            4800 tuples remaining
+            Cleaning current orbit...
+            Cleaning a list of 20 tuples
+            Random Tuples Remaining: 0
+            Cleaning done; 0 random tuples remaining
+
+
+            Collecting 20 random tuples... done
+
+            Cleaning orbit 1
+            Cleaning a list of 20 tuples
+            Random Tuples Remaining: 0
+
+            Cleaning done; 0 random tuples remaining
+
+
+            Collecting 40 random tuples... done
+
+            Cleaning orbit 1
+            Cleaning a list of 40 tuples
+            Random Tuples Remaining: 3
+
+            Cleaning done; 3 random tuples remaining
+
+
+            Orbit 2:
+                                                                                  
+            Length=32
+            Generating Tuple  =[ (1,4)(2,3), (1,2)(3,4), (1,4)(2,3), (1,2)(3,4),
+            (1,3)(2,4) ]
+            Generated subgroup size=4
+            Centralizer size=4
+            4320 tuples remaining
+            Cleaning current orbit...
+            Cleaning a list of 3 tuples
+            Random Tuples Remaining: 2
+            Cleaning done; 2 random tuples remaining
+
+
+            Orbit 3:
+                                                                                  
+            Length=72
+            Generating Tuple  =[ (1,5,2), (1,3,2), (1,2)(3,5), (1,3)(2,5),
+            (1,3)(2,5) ]
+            Generated subgroup size=12
+            Centralizer size=1
+            0 tuples remaining
+            Cleaning current orbit...
+            Cleaning a list of 2 tuples
+            Random Tuples Remaining: 0
+            Cleaning done; 0 random tuples remaining
+
+            gap&gt; # Check we have as many orbits as it says...
+            gap&gt; Length(orbits);
+            3
+            gap&gt; # Inspect the first orbit..
+            gap&gt; orb1:=orbits[1];;
+            gap&gt; # How long is orb1?
+            gap&gt; Length(orb1.TupleTable);
+            3072
+            gap&gt; # Select element 42 ...
+            gap&gt; SelectTuple(orb1, 42);
+            [ (1,3,4), (1,5,3,2,4), (1,5)(2,4), (1,2)(3,5), (2,3)(4,5) ]
+            gap&gt; # Save the orbit to a file...
+            gap&gt; SaveOrbitToFile(orb1, 1, "test");
+            gap&gt; #If the folder doesn't exist we get an error..
+            gap&gt; SaveOrbitToFile(orb1, 1, "foo");
+            AppendTo: cannot open '_foo/1' for output at
+            CallFuncList( APPEND_TO, arg );
+            gap&gt; #
+            gap&gt; # Now we try find generating orbits 
+            gap&gt; group:=SymmetricGroup(5);
+            Sym( [ 1 .. 5 ] )
+            gap&gt; # And we will save them using the `SaveOrbit` option
+            gap&gt; GeneratingMCOrbits(group,1,tuple : SaveOrbit:="example");;
+
+            Total Number of Tuples: 607680
+
+
+
+            Collecting 20 generating tuples .. done
+
+            Cleaning done; 20 random tuples remaining
+
+
+            Orbit 1:                    
+            Length=5064
+            Generating Tuple  =[ (1,3,2,5), (2,4,3), (1,4)(3,5), (1,3)(2,5),
+            (1,4)(3,5) ]
+            Generated subgroup size=120
+            Saving orbit to file _example/0
+            Centralizer size=1
+            0 tuples remaining
+            Cleaning current orbit...
+            Cleaning a list of 20 tuples
+            Random Tuples Remaining: 0
+            Cleaning done; 0 random tuples remaining
+
+            gap&gt; generatingorbits:=last;;
+            gap&gt; # How many generating orbits are there?
+            gap&gt; Length(generatingorbits);
+            1
+            gap&gt; # Is this orbit equal to the other one we found earlier
+            gap&gt; IsEqualOrbit(orb1, generatingorbits[1]);
+            fail
+            gap&gt; # We can reload the orbits...
+            gap&gt; orb2:=RestoreOrbitFromFile(0, "example");;
+            gap&gt; Length(orb2.TupleTable);
+            5064
+        </Log>
+    </Section>
+    <Section Label="sec:application"><Heading>An Application</Heading>
+        This section describes an application of the package. <P/>
+        
+        Let <M>X</M> be a compact Riemann surface of genus <M>g</M> and <M>f: X
+            \rightarrow \mathbb{P}^1\mathbb{C}</M> be a meromorphic function of
+        degree <M>n</M>. Let <M>B</M> be the set of branch points for <M>f</M>
+        and fix a basepoint <M>b_0 \in \mathbb{P}^1\mathbb{C}- B</M>.
+        The fundamental group <M>\pi_1(\mathbb{P}^1 \mathbb{C} - B, b_0) </M>
+        acts transitively on the fibre <M>f^{-1}(b_0)</M> and this corresponds
+        to a representation
+        <Display>
+             f^* :\pi_1(\mathbb{P}^1 \mathbb{C} - B, b_0) \rightarrow S_n
+        </Display>
+        The image of <M>f^*</M> is called  the <E>monodromy group</E> of <M>(X,
+            f)</M>. The fundamental group of the punctured Riemann sphere is
+        generated by the loops that wind around the points in <M>B</M>. Label the
+        branch points <M>b_1,...,b_r</M> and let <M>\tau_i </M>
+        be the image under <M>f^*</M> of the loop, <M>\gamma_i \in
+            \pi_1(\mathbb{P}^1\mathbb{C} - B)</M>, that winds
+        once around the point <M>b_i\in B</M>.
+
+        Therefore,
+        <Display>
+            \langle \tau_1, ..., \tau_r \rangle = G
+        </Display>
+        and
+        <Display>
+            \tau_1 \cdots \tau_r = 1 
+        </Display>
+        Moreover by the Riemann-Hurwitz formula
+        <Display>
+            2(n+g-1) = \sum_1^r {ind}( \tau_i) 
+        </Display>
+        where the <M>{ind}(\tau_i)</M> is the minimal number of factors to
+        express <M>\tau_i</M> as a product of  transpositions.
+
+        A set <M>t_1, \ldots, t_r</M> of elements of <M>S_n</M> satisfying the
+        Riemann-Hurwitz formula, the product-one condition, and generating some
+        transitive subgroup <M>G</M> of <M>S_n</M> is called a <E>genus </E>
+        <M> g </M> <E>generating system </E> for <M>G</M>. Therefore to the
+        meromorphic function <M>(X, f)</M> there is an associated genus <M>g</M>
+        system. In fact the conjugacy classes of the elements <M>\tau_i</M> are
+        also determined by <M>f</M> -- the collection of conjugacy classes is
+        sometimes called the <E> ramification type</E> of <M>f</M>.
+        On the other hand for every genus <M> g</M> generating system, <M>t =
+            (\tau_1, \ldots, \tau_n)</M> for <M>G</M> there is Riemann surface
+        of genus <M>g</M> and a meromorphic function with associated generating
+        system <M>t</M> -- this result is known as <E> Riemann's Existence
+            Theorem</E>.<P />
+
+        The question we hope to use our package to answer is: For a given finite
+        group <M>G</M> how many meromorphic maps with monodromy group <M>G</M> are
+        there? It can be shown -- see <Cite Key="Volklein96" /> for example -- that determining whether
+        two genus <M>g</M> coverings are equivalent corresponds to determining
+        whether their associated genus <M>g</M> systems are in the same mapping
+        class orbit ( most literature would refer to mapping class orbits as
+        braid orbits in this case - this is because of the equivalence between
+        the mapping class group of a punctured disc and the braid groups <Cite
+            Key="Birman75" />). <P />
+
+        Thus for a finite group <M>G</M> we can answer the above principal
+        question using the following process:
+        <List>
+            <Item>
+                For a given finite group <M>G</M> the work of Breuer <Cite
+                    Key="Breuer00" /> can be used to calculate all possible
+                ramification types.
+            </Item>
+            <Item>
+                Pick a tuple, <M>C = (c_1,...,c_r)</M>, of representative elements
+                of the conjugacy classes which correspond to a chosen ramification
+                type as calculated in the previous step.
+            </Item>
+            <Item>
+                Use the function <Code>GeneratingMCOrbits(G, 0, [c1,...,cr])</Code>
+                to calculate the number of mapping class orbits. Note that the
+                genus argument is <M>0</M> because this is the genus of
+                <M>\mathbb{P}^1\mathbb{C}</M>.
+            </Item>
+        </List>
+        For more information on this process and the underlying theory see <Cite
+            Key="MSV" /> and <Cite Key="Volklein96" />.
+    </Section>
+</Chapter>
+

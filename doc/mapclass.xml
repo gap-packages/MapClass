@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<!-- $Id: gapdoc.xml,v 1.15 2008/06/17 14:22:25 gap Exp $ -->
+
+<!-- The documentation to the GAPDoc system. 
+Copyright 2000-2007 by Frank Lübeck and Max Neunhöffer
+Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
+
+<Book Name="MapClass"> 
+
+    <TitlePage>
+        <Title>MapClass</Title>
+        <Author> Adam James
+            <Email>jamesa@maths.bham.ac.uk</Email>
+        </Author>
+        <Author> Kay Magaard
+            <Email>K.Magaard@maths.bham.ac.uk</Email>
+        </Author>
+        <Author> Sergey Shpectorov
+            <Email>s.shpectorov@bham.ac.uk</Email>
+        </Author>
+        <Author> Helmut Völklein
+            <Email>voelkle@iem.uni-due.de</Email>
+        </Author>
+        <Date>October 2011</Date>
+        <Copyright> &copyright; 2004-2011 by Adam James, Kay Magaard 
+          Sergey Shpectorov, and Helmut Völklein <P/>
+          MapClass is free software you can redistribute it and/or modify it
+          under the terms of the GNU General Public License as published by the
+          Free Software Foundation; either version 2 of the License, or (at your
+          option) any later version. For details, see the file 'GPL' in the
+          'etc' directory of the GAP distribution or see the FSF's own
+          site.</Copyright>
+    </TitlePage>
+
+    <TableOfContents/>
+
+    <Body>
+        <#Include SYSTEM "introo.xml">
+    </Body>
+    <Appendix><Heading>Installation</Heading>
+        To Install the package place the "MapClass" folder into your GAP system's
+        'pkg' directory. If you do not have permission to modify the gap package
+        then the package can be included by appending a local directory to GAP's
+        root directory using the '-l' flag. For more information on GAP's root
+        directory process try '?GAP root' in a GAP session. Or see the online
+        help at http://www.gap-system.org/Manuals/doc/htm/ref/CHAP009.htm#SECT002
+
+        To Load the package simply type 'LoadPackage("mapclass");'. If the load
+        has been successful the package banner will be shown.
+    </Appendix>
+
+
+    <Bibliography Databases="bib" />
+    <TheIndex/>
+</Book>
+
+<!-- ==================================================================== -->
+

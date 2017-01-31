@@ -1,0 +1,296 @@
+<!-- $Id: intro.xml,v 1.13 2007/10/04 22:02:12 gap Exp $ -->
+<Chapter Label="ch:chapter2"><Heading>Functions For Inspecting Orbits</Heading>
+
+    This chapter provides an overview of the background material, and provide
+    documentation for the main functions and data structures of the MAPCLASS
+    package.
+
+
+    <Section Label="auxfunction"><Heading>Overview of Main
+            Functions</Heading>
+        The following are the main ways for calculating the mapping class
+        orbits for a given signature and group.
+        <ManSection>
+            <Func Name="AllMCOrbits" Arg="group, genus, tuple"/>
+            <Description>
+                This function calculates the orbit for the given group, genus
+                and tuple. 
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="AllMCOrbitsCore" Arg="group, genus, tuple,
+                partition, constant"/>
+            <Description>
+                This function calculates the orbit for the given group, genus
+                and tuple, with the <M>r</M> branch points partitioned as in
+                partition. It uses the given <A>constant</A> to determine how
+                many of the tuples it want to account for before exiting.
+                 This function also make use of GAP's
+                 <Keyword>OptionsStack</Keyword> if one desires to alter the
+                 algorithm runs. The following options and their defaults are
+                 given below.
+                <Table Align="|r|c|">
+                    <HorLine/>
+                    <Row>
+                        <Item>Option Name</Item><Item>Default Value</Item>
+                    </Row>
+                    <HorLine/>
+                    <Row><Item><Code> InitialSizeCutOff</Code></Item>
+                        <Item>128</Item></Row>
+                    <Row><Item><Code>MaximumWeight</Code></Item><Item>40
+                    </Item></Row>
+                    <Row><Item><Code>MinimumWeight</Code></Item><Item>20
+                    </Item></Row>
+                    <Row><Item><Code>InitialWeight</Code></Item><Item>20
+                    </Item></Row>
+                    <Row><Item><Code>BumpUp</Code></Item><Item>7</Item></Row>
+                    <Row><Item><Code>KnockDown</Code></Item><Item>7</Item></Row>
+                    <Row><Item><Code>InitialNumberOfRandomTuples
+                    </Code></Item><Item>20</Item></Row>
+                    <Row><Item><Code>InitialCutOffValue</Code></Item>
+                      <Item>0</Item></Row>
+                    <Row><Item> <Code> HashLength</Code></Item><Item> 5000
+                    </Item></Row>
+                    <Row><Item><Code> SaveOrbit </Code></Item><Item> False
+                    </Item></Row>
+                    <HorLine/>
+                </Table>
+                The majority of the options are uninteresting and only subtly
+                alter the running of the routine.The options
+                <Code>InitialSizeCutOff</Code>, <Code>MaximumWeight</Code>,
+                <Code>MinimumWeight</Code>,
+                <Code>InitialWeight</Code>,<Code>BumpUp</Code>,
+                <Code>KnockDown</Code>, are the options controlling how the
+                code handles the subgroup weighting discussed in the algorithm
+                overview. The option <Code>InitialNumberOfRandomTuples</Code>
+                decides how many tuples the routine collects before trying to
+                see if they are in some pre-existing orbit. The option
+                <Code>InitialCutOffValue</Code> decides at what point we stop
+                searching for new orbits - if only large orbits are of interest
+                then this can be set larger to ignore these. Finally the option
+                <Code>SaveOrbit</Code> which is by default
+                <Keyword>False</Keyword> can be set to the name of a directory
+                in which you want to save orbits. This option then saves the
+                orbits to files in the folder with "<File>_name</File>". S for
+                example if you wish to save your orbits into the file
+                <File>_example</File> then you would run
+                <Code>AllMCOrbits(group, genus, tuple:
+                  SaveOrbit:="example");</Code>
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="GeneratingMCOrbits" Arg="group, genus, tuple" />
+            <Description> 
+                This calculates the orbits for the given arguments.
+                 Unlike the <Ref Filt="AllMCOrbits" /> function,
+                <Code>GeneratingMCOrbits</Code> calculates only those orbits
+                whose tuples generate the whole of our original group.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="GeneratingMCOrbitsCore" Arg="group, genus, tuple,
+                partition, constant" />
+            <Description> 
+                This calculates the orbits for the given arguments.  Unlike the
+                <Ref Filt="AllMCOrbits" /> function,
+                <Code>GeneratingMCOrbitsCore</Code> calculates only those orbits
+                whose tuples generate the whole of our original group. As with
+                <Ref Filt="AllMCOrbitsCore" />, the argument <A>partition</A>
+                must be a partition of the conjugacy classes represented in list
+                form. We also have access to the full value of the options stack
+                as in <Ref Filt="AllMCOrbitsCore" />.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="MappingClassOrbit" Arg="group, genus, principaltuple,
+                partition, tuple"
+                />
+            <Returns> an orbit record for an orbit containing tuple or
+                <K>fail</K>
+            </Returns> 
+            <Description> 
+                Calculates the orbit of the <A>tuple</A> with respect
+                to the given <A>group</A>, <A>principaltuple</A> and
+                <A>genus</A>.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="PrepareMinTree" Arg="principaltuple,
+                group, ourR, genus" />
+            <Returns> a record with two keys <Code>MinimizationTree</Code> and
+                <Code>MinimumSet</Code>. If <Code>record</Code> is the returned
+                record then <Code>record.MinimizationTree</Code> is the list
+                encoding the tree used to help minimize tuples.The list <Code>
+                record.MinimumSet</Code> is a list of minimal elements which
+                is also used to speed up tuple minimization. </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="MinimizeTuple" Arg="tuple, minimizationTree, minimumSet,
+                numberOfGenerators"/>
+            <Returns> the minimal tuple in the same orbit of
+                <A>tuple</A>.</Returns>
+            <Description> Take the minimisation data provided by <Ref
+                    Filt="PrepareMinTree" /> and minimizes the given
+                <A>tuple</A>.
+            </Description>
+        </ManSection>
+        <ManSection>
+          <Func Name="EasyMinimizeTuple" Arg="group, genus, tuple" />
+            <Returns> the minimal tuple in the same orbit of
+                <A>tuple</A>.</Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="IsInOrbit" Arg="orbit, tuple" />
+            <Returns><Keyword>True</Keyword> if the <A>tuple</A> lies in the
+                <A>orbit</A>.</Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="FindTupleInOrbit" Arg="orbit, tuple" />
+            <Returns> the index of <A>tuple</A> in orbit.TupleTable if in the
+                <A>orbit</A>. If not in <A>orbit</A> returns
+                <Keyword>fail</Keyword>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="IsEqualOrbit" Arg="orbit1, orbit2" />
+            <Returns><Keyword>true</Keyword> if the two orbits are equal else
+                returns <Keyword>fail</Keyword>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="LengthOfOrbit" Arg="orbit" />
+            <Returns> the length of the <A>orbit</A>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="SelectTuple" Arg="orbit, index" />
+            <Returns>  the tuple 
+                <Code>orbit.TupleTable[index]</Code>.
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="NumberGeneratingTuples" Arg="group, partition, tuple,
+              genus" />
+            <Returns> the total number of possible generating tuples for the
+                group and tuple. 
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="TotalNumberTuples" Arg="group, partition, tuple, genus"
+              />
+            <Returns> the total number of tuples we have to account for
+            </Returns>
+        </ManSection>
+        <ManSection>
+            <Func Name="CalculateTuplePartition" Arg="group, tuple" />
+            <Returns> A partition of <Math>{1,\ldots, r}</Math> where
+              <Math>r</Math> is the length of the tuple.
+            </Returns>
+            <Description>
+              The function returns a partition of <Math>{1,\ldots, r}</Math>
+              such that <M>i</M> and <M>j</M> lie in the same block if and only
+              if the elements <Code>tuple[i]</Code> and <Code>tuple[j]</Code>
+              are member of the same conjugacy class. The program currently
+              requires that the elements of the tuple be ordered such that if
+              <Code>tuple[i]</Code> and <Code>tuple[j]</Code> are in the same
+              conjugacy class with <M>i \le j</M> then so is<Code>tuple[k]</Code>
+              for all <M>i \le k \le j</M>.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="RestoreOrbitFromFile" Arg="n, name [, path]" />
+            <Returns> the n-th orbit record from the project with project "name"
+            </Returns>
+            <Description> By default the function searches the current working
+                directory for the saved project folder and searches inside this
+                for the n-th orbit. If no such orbit exists it returns
+                <Keyword>fail</Keyword>. If an optional argument <A>path</A> is
+                provided then it searches this path for a folder with the name
+                specified (note that path expects a <Code>Directory</Code>
+                object). If an orbit exists it returns it as a record as
+                outlined in the data structure section.
+            </Description>
+        </ManSection>
+        <ManSection>
+            <Func Name="SaveOrbitToOrbit" Arg="name, orbit, n" />
+            <Description>
+                Saves the orbit to filename "n" in the directory
+                <Code>'_name'</Code>.
+            </Description>
+        </ManSection>
+    </Section>
+    <Section Label="datastructures"><Heading>Key Data Structures</Heading>
+        Many of the above function require or return a few key data structures
+        which we aim to document.
+        <Subsection Label="orbitrecord"><Heading>The Orbit Record</Heading>
+            Many of the functions return or expect an orbit "object". This
+            object is in fact record with the following values:
+            <List>
+                <Item>
+                    <Code>ProjectName </Code>- the name of the project
+                </Item>
+                <Item>
+                    <Code>PrincipalFiniteGroup </Code>- the finite group
+                </Item>
+                <Item>
+                    <Code>OurG </Code>- genus
+                </Item>
+                <Item>
+                    <Code>OurR </Code>- number of branch points
+                </Item>
+                <Item>
+                    <Code>OurN </Code>- number of points on which our group
+                    acts
+                </Item>
+                <Item>
+                    <Code>NumberOfGenerators </Code>- 2 <Code>OurG</Code>+
+                    <Code>OurR </Code>
+                </Item>
+                <Item>
+                    <Code>OurFreeGroup </Code>- a free group on
+                    <Code>NumberOfGenerators </Code>letters
+                </Item>
+                <Item>
+                    <Code>AbsGens </Code>- generators for
+                    <Code>OurFreeGroup</Code>
+                </Item> 
+                <Item>
+                    <Code>OurAlpha
+                    </Code> - generators of
+                    <Code>OurFreeGroup</Code>corresponding to the
+                    <M>\alpha_i</M> type loops in the fundamental group ( the
+                    first <M>g</M> elements of <Code>AbsGens</Code>)
+                </Item>
+                <Item>
+                    <Code>OurBeta </Code>- elements of <Code>OurFreeGroup
+                    </Code>corresponding to <M>\beta</M> type loops 
+                </Item>
+                <Item>
+                    <Code>OurGamma </Code>- generators of <Code>OurFreeGroup
+                </Code>corresponding to the loops around branch points
+                </Item>
+                <Item>
+                    <Code>TupleTable </Code>- a table containing all the
+                    tuples in the orbit
+                </Item>
+                <Item><Code>HashLength</Code></Item>
+                <Item><Code>Hash</Code></Item>
+                <Item><Code>PrimeCode</Code></Item>
+                <Item><Code>OurAction</Code></Item>
+                <Item><Code>ActionOnOrbit</Code></Item>
+                <Item><Code>MinimizationTree</Code>- minimization structure</Item>
+                <Item><Code>MinimumSet</Code>- minimizaton structure</Item>
+            </List>
+        </Subsection>
+        <Subsection Label="tupletable">
+            <Heading>The Tuple Table</Heading>
+            The tuple table is a list. Each element of the list is a record with
+            the names, tuple and next. If <Code>orbit</Code> is an orbit object
+            then <Code>orbit.TupleTable[n].tuple</Code> returns the tuple at
+            index <M>n</M> of the tuple table.
+        </Subsection>
+    </Section>
+    <Section><Heading>A Sample Session</Heading>
+    </Section>
+</Chapter>
+
