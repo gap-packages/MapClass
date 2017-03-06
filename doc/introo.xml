@@ -407,138 +407,138 @@
     </Section>
     <Section><Heading>A Sample Session</Heading>
         We demonstate how one might use the package.
-        <Log>
-            gap&gt; group:=AlternatingGroup(5);
-            Alt( [ 1 .. 5 ] )
-            gap&gt; tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
-            [ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
-            gap&gt; orbits:=AllMCOrbits(group,1,tuple);;
+    <Example><![CDATA[
+gap> group:=AlternatingGroup(5);
+Alt( [ 1 .. 5 ] )
+gap> tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
+[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
+gap> orbits:=AllMCOrbits(group,1,tuple);;
 
-            Total Number of Tuples: 189120
-
-
-            Collecting 20 random tuples... done
-
-            Cleaning done; 20 random tuples remaining
+Total Number of Tuples: 189120
 
 
-            Orbit 1:
-                                                                                  
-            Length=3072
-            Generating Tuple  =[ (1,2,4,5,3), (1,4,5,2,3), (1,2)(4,5),
-            (1,4)(2,3), (2,5)(3,4) ]
-            Generated subgroup size=60
-            Centralizer size=1
-            4800 tuples remaining
-            Cleaning current orbit...
-            Cleaning a list of 20 tuples
-            Random Tuples Remaining: 0
-            Cleaning done; 0 random tuples remaining
+Collecting 20 random tuples... done
+
+Cleaning done; 20 random tuples remaining
 
 
-            Collecting 20 random tuples... done
-
-            Cleaning orbit 1
-            Cleaning a list of 20 tuples
-            Random Tuples Remaining: 0
-
-            Cleaning done; 0 random tuples remaining
-
-
-            Collecting 40 random tuples... done
-
-            Cleaning orbit 1
-            Cleaning a list of 40 tuples
-            Random Tuples Remaining: 3
-
-            Cleaning done; 3 random tuples remaining
+Orbit 1:
+																	  
+Length=3072
+Generating Tuple  =[ (1,2,4,5,3), (1,4,5,2,3), (1,2)(4,5),
+(1,4)(2,3), (2,5)(3,4) ]
+Generated subgroup size=60
+Centralizer size=1
+4800 tuples remaining
+Cleaning current orbit...
+Cleaning a list of 20 tuples
+Random Tuples Remaining: 0
+Cleaning done; 0 random tuples remaining
 
 
-            Orbit 2:
-                                                                                  
-            Length=32
-            Generating Tuple  =[ (1,4)(2,3), (1,2)(3,4), (1,4)(2,3), (1,2)(3,4),
-            (1,3)(2,4) ]
-            Generated subgroup size=4
-            Centralizer size=4
-            4320 tuples remaining
-            Cleaning current orbit...
-            Cleaning a list of 3 tuples
-            Random Tuples Remaining: 2
-            Cleaning done; 2 random tuples remaining
+Collecting 20 random tuples... done
+
+Cleaning orbit 1
+Cleaning a list of 20 tuples
+Random Tuples Remaining: 0
+
+Cleaning done; 0 random tuples remaining
 
 
-            Orbit 3:
-                                                                                  
-            Length=72
-            Generating Tuple  =[ (1,5,2), (1,3,2), (1,2)(3,5), (1,3)(2,5),
-            (1,3)(2,5) ]
-            Generated subgroup size=12
-            Centralizer size=1
-            0 tuples remaining
-            Cleaning current orbit...
-            Cleaning a list of 2 tuples
-            Random Tuples Remaining: 0
-            Cleaning done; 0 random tuples remaining
+Collecting 40 random tuples... done
 
-            gap&gt; # Check we have as many orbits as it says...
-            gap&gt; Length(orbits);
-            3
-            gap&gt; # Inspect the first orbit..
-            gap&gt; orb1:=orbits[1];;
-            gap&gt; # How long is orb1?
-            gap&gt; Length(orb1.TupleTable);
-            3072
-            gap&gt; # Select element 42 ...
-            gap&gt; SelectTuple(orb1, 42);
-            [ (1,3,4), (1,5,3,2,4), (1,5)(2,4), (1,2)(3,5), (2,3)(4,5) ]
-            gap&gt; # Save the orbit to a file...
-            gap&gt; SaveOrbitToFile(orb1, 1, "test");
-            gap&gt; #If the folder doesn't exist we get an error..
-            gap&gt; SaveOrbitToFile(orb1, 1, "foo");
-            AppendTo: cannot open '_foo/1' for output at
-            CallFuncList( APPEND_TO, arg );
-            gap&gt; #
-            gap&gt; # Now we try find generating orbits 
-            gap&gt; group:=SymmetricGroup(5);
-            Sym( [ 1 .. 5 ] )
-            gap&gt; # And we will save them using the `SaveOrbit` option
-            gap&gt; GeneratingMCOrbits(group,1,tuple : SaveOrbit:="example");;
+Cleaning orbit 1
+Cleaning a list of 40 tuples
+Random Tuples Remaining: 3
 
-            Total Number of Tuples: 607680
+Cleaning done; 3 random tuples remaining
 
 
+Orbit 2:
+																	  
+Length=32
+Generating Tuple  =[ (1,4)(2,3), (1,2)(3,4), (1,4)(2,3), (1,2)(3,4),
+(1,3)(2,4) ]
+Generated subgroup size=4
+Centralizer size=4
+4320 tuples remaining
+Cleaning current orbit...
+Cleaning a list of 3 tuples
+Random Tuples Remaining: 2
+Cleaning done; 2 random tuples remaining
 
-            Collecting 20 generating tuples .. done
 
-            Cleaning done; 20 random tuples remaining
+Orbit 3:
+																	  
+Length=72
+Generating Tuple  =[ (1,5,2), (1,3,2), (1,2)(3,5), (1,3)(2,5),
+(1,3)(2,5) ]
+Generated subgroup size=12
+Centralizer size=1
+0 tuples remaining
+Cleaning current orbit...
+Cleaning a list of 2 tuples
+Random Tuples Remaining: 0
+Cleaning done; 0 random tuples remaining
+
+gap> # Check we have as many orbits as it says...
+gap> Length(orbits);
+3
+gap> # Inspect the first orbit..
+gap> orb1:=orbits[1];;
+gap> # How long is orb1?
+gap> Length(orb1.TupleTable);
+3072
+gap> # Select element 42 ...
+gap> SelectTuple(orb1, 42);
+[ (1,3,4), (1,5,3,2,4), (1,5)(2,4), (1,2)(3,5), (2,3)(4,5) ]
+gap> # Save the orbit to a file...
+gap> SaveOrbitToFile(orb1, 1, "test");
+gap> #If the folder doesn't exist we get an error..
+gap> SaveOrbitToFile(orb1, 1, "foo");
+AppendTo: cannot open '_foo/1' for output at
+CallFuncList( APPEND_TO, arg );
+gap> #
+gap> # Now we try find generating orbits 
+gap> group:=SymmetricGroup(5);
+Sym( [ 1 .. 5 ] )
+gap> # And we will save them using the `SaveOrbit` option
+gap> GeneratingMCOrbits(group,1,tuple : SaveOrbit:="example");;
+
+Total Number of Tuples: 607680
 
 
-            Orbit 1:                    
-            Length=5064
-            Generating Tuple  =[ (1,3,2,5), (2,4,3), (1,4)(3,5), (1,3)(2,5),
-            (1,4)(3,5) ]
-            Generated subgroup size=120
-            Saving orbit to file _example/0
-            Centralizer size=1
-            0 tuples remaining
-            Cleaning current orbit...
-            Cleaning a list of 20 tuples
-            Random Tuples Remaining: 0
-            Cleaning done; 0 random tuples remaining
 
-            gap&gt; generatingorbits:=last;;
-            gap&gt; # How many generating orbits are there?
-            gap&gt; Length(generatingorbits);
-            1
-            gap&gt; # Is this orbit equal to the other one we found earlier
-            gap&gt; IsEqualOrbit(orb1, generatingorbits[1]);
-            fail
-            gap&gt; # We can reload the orbits...
-            gap&gt; orb2:=RestoreOrbitFromFile(0, "example");;
-            gap&gt; Length(orb2.TupleTable);
-            5064
-        </Log>
+Collecting 20 generating tuples .. done
+
+Cleaning done; 20 random tuples remaining
+
+
+Orbit 1:                    
+Length=5064
+Generating Tuple  =[ (1,3,2,5), (2,4,3), (1,4)(3,5), (1,3)(2,5),
+(1,4)(3,5) ]
+Generated subgroup size=120
+Saving orbit to file _example/0
+Centralizer size=1
+0 tuples remaining
+Cleaning current orbit...
+Cleaning a list of 20 tuples
+Random Tuples Remaining: 0
+Cleaning done; 0 random tuples remaining
+
+gap> generatingorbits:=last;;
+gap> # How many generating orbits are there?
+gap> Length(generatingorbits);
+1
+gap> # Is this orbit equal to the other one we found earlier
+gap> IsEqualOrbit(orb1, generatingorbits[1]);
+fail
+gap> # We can reload the orbits...
+gap> orb2:=RestoreOrbitFromFile(0, "example");;
+gap> Length(orb2.TupleTable);
+5064
+    ]]></Example>
     </Section>
     <Section Label="sec:application"><Heading>An Application</Heading>
         This section describes an application of the package. <P/>
