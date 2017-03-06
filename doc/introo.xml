@@ -410,7 +410,7 @@
     <Example><![CDATA[
 gap> group:=AlternatingGroup(5);
 Alt( [ 1 .. 5 ] )
-gap> tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
+gap> tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ];
 [ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ]
 gap> orbits:=AllMCOrbits(group,1,tuple);;
 
