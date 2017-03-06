@@ -217,7 +217,7 @@ AcceptDate := "11/2011",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "web.mat.bham.ac.uk/~jamesa/mapclass/README",
+  "web.mat.bham.ac.uk/~jamesa/mapclass/README.md",
 PackageInfoURL := 
   "web.mat.bham.ac.uk/~jamesa/mapclass/PackageInfo.g",
 
