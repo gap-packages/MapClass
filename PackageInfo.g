@@ -150,7 +150,7 @@ AcceptDate := "11/2011",
 # computing the Smith normal form of integer matrices and some related \
 # utilities.",
 AbstractHTML := 
-  "The <span class=\"pkgname\">MapCLass</span> package calculates the \
+  "The <span class=\"pkgname\">MapClass</span> package calculates the \
    mapping class group orbits for a given finite group.",
               
 ##  Here is the information on the help books of the package, used for
