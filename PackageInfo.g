@@ -184,6 +184,7 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "MapClass",
   LongTitle := "Documentation for MapClass Package",
+  ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system

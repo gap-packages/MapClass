@@ -46,13 +46,14 @@ citeas: |
 
 bibtex: |
     @misc{ MapClass1.4.0,
-      author =           {James, A. and Magaard, K. and Shpectorov, S. and Volklein, H.},
-      title =            {{MapClass},  A  Package  For Mapping Class Orbit Computation,
-                          {V}ersion 1.4.0},
+      author =           {James,  A.  and  Magaard,  K.  and  Shpectorov, S. and
+                          Volklein, H.},
+      title =            {{MapClass},   A   Package   For  Mapping  Class  Orbit
+                          Computation, {V}ersion 1.4.0},
       month =            {Sep},
       year =             {2018},
       note =             {Refereed GAP package},
-      howpublished =     {\href               {https://gap-packages.github.io/MapClass}
+      howpublished =     {\href        {https://gap-packages.github.io/MapClass}
                           {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{MapClass}}},
       keywords =         {braid orbit; mapping class orbit; Hurwitz loci},
