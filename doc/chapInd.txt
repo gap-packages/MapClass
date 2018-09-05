@@ -1,0 +1,25 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XAllMCOrbits[102X 1.2-1 
+  [2XAllMCOrbitsCore[102X 1.2-2 
+  [2XCalculateTuplePartition[102X 1.2-15 
+  [2XEasyMinimizeTuple[102X 1.2-8 
+  [2XFindTupleInOrbit[102X 1.2-10 
+  [2XGeneratingMCOrbits[102X 1.2-3 
+  [2XGeneratingMCOrbitsCore[102X 1.2-4 
+  [2XIsEqualOrbit[102X 1.2-11 
+  [2XIsInOrbit[102X 1.2-9 
+  [2XMappingClassOrbit[102X 1.2-5 
+  [2XMinimizeTuple[102X 1.2-7 
+  [2XNumberGeneratingTuples[102X 1.2-13 
+  Overview 1.1 
+  [2XPrepareMinTree[102X 1.2-6 
+  [2XRestoreOrbitFromFile[102X 1.2-16 
+  [2XSaveOrbitToFile[102X 1.2-17 
+  [2XSelectTuple[102X 1.2-12 
+  [2XTotalNumberTuples[102X 1.2-14 
+  
+  
+  -------------------------------------------------------

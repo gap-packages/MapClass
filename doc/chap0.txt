@@ -1,1 +1,67 @@
-Placeholder
+  
+  
+                                    [1XMapClass[101X
+  
+  
+                                 September 2018
+  
+  
+                                   Adam James
+  
+                                  Kay Magaard
+  
+                               Sergey Shpectorov
+  
+                                Helmut Völklein
+  
+  
+  
+  Sergey Shpectorov
+      Email:    [7Xmailto:s.shpectorov@bham.ac.uk[107X
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©  2004-2018  by  Adam  James,  Kay  Magaard  Sergey  Shpectorov, and Helmut
+  Völklein[133X
+  
+  [33X[0;0YMapClass is free software you can redistribute it and/or modify it under the
+  terms  of  the  GNU General Public License as published by the Free Software
+  Foundation;  either  version 2 of the License, or (at your option) any later
+  version.  For  details, see the file 'GPL' in the 'etc' directory of the GAP
+  distribution or see the FSF's own site.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (MapClass)[101X
+  
+  1 [33X[0;0YIntroduction and Main Functions[133X
+    1.1 [33X[0;0YBackground Material[133X
+    1.2 [33X[0;0YOverview of Main Functions[133X
+      1.2-1 AllMCOrbits
+      1.2-2 AllMCOrbitsCore
+      1.2-3 GeneratingMCOrbits
+      1.2-4 GeneratingMCOrbitsCore
+      1.2-5 MappingClassOrbit
+      1.2-6 PrepareMinTree
+      1.2-7 MinimizeTuple
+      1.2-8 EasyMinimizeTuple
+      1.2-9 IsInOrbit
+      1.2-10 FindTupleInOrbit
+      1.2-11 IsEqualOrbit
+      1.2-12 SelectTuple
+      1.2-13 NumberGeneratingTuples
+      1.2-14 TotalNumberTuples
+      1.2-15 CalculateTuplePartition
+      1.2-16 RestoreOrbitFromFile
+      1.2-17 SaveOrbitToFile
+    1.3 [33X[0;0YKey Data Structures[133X
+      1.3-1 [33X[0;0YThe Orbit Record[133X
+      1.3-2 [33X[0;0YThe Tuple Table[133X
+    1.4 [33X[0;0YA Sample Session[133X
+    1.5 [33X[0;0YAn Application[133X
+  A [33X[0;0YInstallation[133X
+  
+  
+  [32X

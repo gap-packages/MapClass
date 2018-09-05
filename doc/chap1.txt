@@ -1,0 +1,529 @@
+  
+  [1X1 [33X[0;0YIntroduction and Main Functions[133X[101X
+  
+  [33X[0;0YThis  chapter  provides an overview of the background material, and provides
+  documentation  for  the  main  functions and data structures of the MapClass
+  package.[133X
+  
+  
+  [1X1.1 [33X[0;0YBackground Material[133X[101X
+  
+  [33X[0;0YLet  [22XG[122X  be  a  finite  group,  let [22XC_1,..., C_r[122X be a collection of conjugacy
+  classes  in  [22XG[122X. Let [22XmathcalE = mathcalE(G,g,(C_1, dots, C_r))[122X denote the set
+  of  all tuples [22Xσ = (σ_1,...,σ_2g+r)∈ G^2g+r[122X (for natural numbers [22Xg[122X and [22Xr[122X) of
+  elements in [22XG[122X satisfying the relation[133X
+  
+  
+  [24X[33X[0;6Y\prod_{i=1}^g [\sigma_i, \sigma_{g+i}] \prod_{i=1}^r \sigma_{2g+i} = 1[133X
+  
+  [124X
+  
+  [33X[0;0Yand such that [22Xσ_2g +k ∈ C_k[122X. If the tuple also satisfies [22X⟨ σ_1, ..., σ_2g+r⟩
+  = G[122X it is said to be [13Xgenerating[113X.[133X
+  
+  [33X[0;0YOne  may  associate the elements of the tuple [22Xσ[122X with the standard generators
+  of  the  fundamental  group  of  a  compact  connected surface [22XS[122X (genus [22Xg[122X, [22Xr[122X
+  punctures).  The  mapping  class  group  of  [22XS[122X  is  naturally  isomorphic to
+  [22XOut(π_1(S))[122X  and  so  gives  rise to an action on the fundamental group of [22XS[122X
+  modulo  inner  automorphisms. This action can be transferred to an action on
+  the  set [22XmathcalE[122X (up to conjugation in [22XG[122X). The [13Xmapping class orbits[113X are the
+  orbits of [22XmathcalE[122X under this action.[133X
+  
+  [33X[0;0YThe package can be used to compute the set [22XmathcalE(G, g, (C_1,...,C_r))[122X and
+  the  corresponding  partition  into mapping class orbits for a given group [22XG[122X
+  and a set of conjugacy classes [22X(C_1,...,C_r)[122X (although the programs expect a
+  tuple of class representatives). For an example application see Section [14X1.5[114X.
+  We call the tuple [22X(g;C_1,...,C_r)[122X the signature. The package is an extension
+  of the [13XBraid[113X package for [5XGAP[105X.[133X
+  
+  
+  [1X1.2 [33X[0;0YOverview of Main Functions[133X[101X
+  
+  [33X[0;0YThe  following  are  the  principal  ways  for calculating the mapping class
+  orbits  for  a  given  signature  and  group.  We  require  our groups to be
+  permutation groups, and the tuple in question to have length at least two.[133X
+  
+  [1X1.2-1 AllMCOrbits[101X
+  
+  [33X[1;0Y[29X[2XAllMCOrbits[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xtuple[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  calculates  the orbits for the given group, genus and tuple.
+  This  function is a wrapper for the function [2XAllMCOrbitsCore[102X ([14X1.2-2[114X), and so
+  can make use of GAP's [9XOptionsStack[109X. The options are described in more detail
+  in  the  documentation for [2XAllMCOrbitsCore[102X ([14X1.2-2[114X). We draw attention to two
+  useful  options: the [10XOutputStyle[110X and [10XSaveOrbit[110X options. The [10XSaveOrbit[110X option
+  takes  values  of  either  [9Xfalse[109X - in which case the orbit is not saved to a
+  file  -  or it accepts a string that is the name of a directory in which the
+  routine  saves  the  orbits. See [2XAllMCOrbitsCore[102X ([14X1.2-2[114X) for more details on
+  the  saving  process. The [10X OutputStyle [110X option controls the verbosity of the
+  output of the function. It accepts three possible values:[133X
+  
+  [30X    [33X[0;6Y[10X"silent"[110X  --  the  routine  prints  no output except in the case of an
+        Error.[133X
+  
+  [30X    [33X[0;6Y[10X"single-line"[110X  --  the  routine  prints  output  to  a single line. An
+        intermediate  output  style  for those who want some output but do not
+        want to see all diagnostic output.[133X
+  
+  [30X    [33X[0;6Y[10X"full"[110X -- the routine provides full diagnostic output.[133X
+  
+  [1X1.2-2 AllMCOrbitsCore[101X
+  
+  [33X[1;0Y[29X[2XAllMCOrbitsCore[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xtuple[103X, [3Xpartition[103X, [3Xconstant[103X ) [32X function[133X
+  
+  [33X[0;0YThis  function  calculates  the orbits for the given group, genus and tuple,
+  with  the  [22Xr[122X  branch  points  partitioned as in [3Xpartition[103X. It uses the given
+  [3Xconstant[103X  to  determine how many of the tuples it want to account for before
+  exiting. This function also make use of GAP's [9XOptionsStack[109X if one desires to
+  alter  how  the algorithm runs. The following options and their defaults are
+  given below.[133X
+  
+      ┌──────────────────────────────┬───────────────┐
+      │                  Option Name │ Default Value │ 
+      ├──────────────────────────────┼───────────────┤
+      │                [10XMaximumWeight[110X │      40       │ 
+      │                [10XMinimumWeight[110X │      20       │ 
+      │                [10XInitialWeight[110X │      20       │ 
+      │                       [10XBumpUp[110X │       7       │ 
+      │                    [10XKnockDown[110X │       7       │ 
+      │ [10XInitialNumberOfRandomTuples [110X │      20       │ 
+      │                  [10X SaveOrbit [110X │     [9Xfalse[109X     │ 
+      │                [10X OutputStyle [110X │    [9X"full"[109X     │ 
+      └──────────────────────────────┴───────────────┘
+  
+  [33X[0;0YWhen  trying  to  search  for  orbits  it  can  be the case that the routine
+  struggles  to  find a small orbit because of the low probability of randomly
+  choosing  a  tuple in the orbit. To combat this problem the routine does not
+  choose  tuples  entirely  randomly  but  uses a weighted random selection to
+  increase  the  probability of selecting tuples appearing in small tuples. To
+  small  subgroups  of our group we have an associated weight. When a subgroup
+  is  generated  by a tuple in our orbit frequently then we reduce its weight.
+  Subgroups which do not appear often have their weight increased. The options
+  [10XMaximumWeight[110X,  [10XMinimumWeight[110X,  [10XInitialWeight[110X,[10XBumpUp[110X, and [10XKnockDown[110X, control
+  this  subgroup  weighting.  Each  option takes positive integer values. They
+  play the following roles in the weighting process:[133X
+  
+  [30X    [33X[0;6Y[10XMaximumWeight[110X : The maximum weight that a subgroup can be.[133X
+  
+  [30X    [33X[0;6Y[10XMinimumWeight[110X : The minimum weight that a subgroup can be.[133X
+  
+  [30X    [33X[0;6Y[10XInitialWeight[110X  : The weight that a new subgroup receives when added to
+        to the list of small subgroups.[133X
+  
+  [30X    [33X[0;6Y[10XBumpUp[110X  :  The  amount we increase the weight of a subgroup by when it
+        does not appear frequently.[133X
+  
+  [30X    [33X[0;6Y[10XKnockDown[110X : The amount we decrease the weight of a subgroup by when it
+        appears too frequently.[133X
+  
+  [33X[0;0YThe  default  options were chosen experimentally and so it may be beneficial
+  to tune these values for a specific case.[133X
+  
+  [33X[0;0YThe  option  [10XInitialNumberOfRandomTuples[110X decides how many tuples the routine
+  collects before trying to see if they are in some pre-existing orbit.[133X
+  
+  [33X[0;0YThe  option  [10XSaveOrbit[110X which is by default [9Xfalse[109X can be set to the name of a
+  directory  in  which  you  want  to  save orbits. This option then saves the
+  orbits  to  files  in the folder with "[11X_name[111X". So for example if you wish to
+  save   your   orbits   into   the   file   [11X_example[111X   then   you  would  run
+  [10XAllMCOrbits(group, genus, tuple: SaveOrbit:="example");[110X. The orbits are then
+  saved  in  orbits  which  are named numerically. Following on from the above
+  example then the first orbit will be saved as "_example/0". The [10X OutputStyle
+  [110X  option  controls  the  verbosity  of the output. It accepts three possible
+  values:[133X
+  
+  [30X    [33X[0;6Y[10X"silent"[110X  -  the  routine  prints  no  output except in the case of an
+        Error.[133X
+  
+  [30X    [33X[0;6Y[10X"single-line"[110X  -  the routine output to a single line. An intermediate
+        output style for those who want some output but do not want to see all
+        diagnostic output.[133X
+  
+  [30X    [33X[0;6Y[10X"full"[110X - the routine provides full diagnostic output.[133X
+  
+  [1X1.2-3 GeneratingMCOrbits[101X
+  
+  [33X[1;0Y[29X[2XGeneratingMCOrbits[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xtuple[103X ) [32X function[133X
+  
+  [33X[0;0YThis  calculates  the orbits for the given arguments. Unlike the [2XAllMCOrbits[102X
+  ([14X1.2-1[114X)  function,  [10XGeneratingMCOrbits[110X  calculates  only  those orbits whose
+  tuples generate the whole of our original group.[133X
+  
+  [1X1.2-4 GeneratingMCOrbitsCore[101X
+  
+  [33X[1;0Y[29X[2XGeneratingMCOrbitsCore[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xtuple[103X, [3Xpartition[103X, [3Xconstant[103X ) [32X function[133X
+  
+  [33X[0;0YThis  calculates  the orbits for the given arguments. Unlike the [2XAllMCOrbits[102X
+  ([14X1.2-1[114X)  function, [10XGeneratingMCOrbitsCore[110X calculates only those orbits whose
+  tuples  generate  the  whole  of our original group. As with [2XAllMCOrbitsCore[102X
+  ([14X1.2-2[114X), the argument [3Xpartition[103X must be a partition of the conjugacy classes
+  represented  in  list  form.  We  also  have access to the full value of the
+  options stack as in [2XAllMCOrbitsCore[102X ([14X1.2-2[114X).[133X
+  
+  [1X1.2-5 MappingClassOrbit[101X
+  
+  [33X[1;0Y[29X[2XMappingClassOrbit[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xprincipaltuple[103X, [3Xpartition[103X, [3Xtuple[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Yan orbit record for an orbit containing tuple or returns [9Xfail[109X[133X
+  
+  [33X[0;0YCalculates  the  orbit  of  the  [3Xtuple[103X  with  respect  to  the  given [3Xgroup[103X,
+  [3Xprincipaltuple[103X and [3Xgenus[103X.[133X
+  
+  [1X1.2-6 PrepareMinTree[101X
+  
+  [33X[1;0Y[29X[2XPrepareMinTree[102X( [3Xprincipaltuple[103X, [3Xgroup[103X, [3XourR[103X, [3Xgenus[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  record with two keys [10XMinimizationTree[110X and [10XMinimumSet[110X. If [10Xrecord[110X
+            is  the  returned  record then [10Xrecord.MinimizationTree[110X is the list
+            encoding  the  tree  used  to  help  minimize  tuples.  The  list [10X
+            record.MinimumSet[110X is a list of minimal elements which is also used
+            to speed up tuple minimization.[133X
+  
+  [1X1.2-7 MinimizeTuple[101X
+  
+  [33X[1;0Y[29X[2XMinimizeTuple[102X( [3Xtuple[103X, [3XminimizationTree[103X, [3XminimumSet[103X, [3XnumberOfGenerators[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe minimal tuple in the same orbit of [3Xtuple[103X.[133X
+  
+  [33X[0;0YTake  the minimisation data provided by [2XPrepareMinTree[102X ([14X1.2-6[114X) and minimizes
+  the given [3Xtuple[103X.[133X
+  
+  [1X1.2-8 EasyMinimizeTuple[101X
+  
+  [33X[1;0Y[29X[2XEasyMinimizeTuple[102X( [3Xgroup[103X, [3Xgenus[103X, [3Xtuple[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe minimal tuple in the same orbit as [3Xtuple[103X.[133X
+  
+  [1X1.2-9 IsInOrbit[101X
+  
+  [33X[1;0Y[29X[2XIsInOrbit[102X( [3Xorbit[103X, [3Xtuple[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9XTrue[109X if the [3Xtuple[103X lies in the [3Xorbit[103X.[133X
+  
+  [1X1.2-10 FindTupleInOrbit[101X
+  
+  [33X[1;0Y[29X[2XFindTupleInOrbit[102X( [3Xorbit[103X, [3Xtuple[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe  index  of  [3Xtuple[103X  in [10Xorbit.TupleTable[110X if in the [3Xorbit[103X. If the
+            tuple is not in [3Xorbit[103X returns [9Xfail[109X.[133X
+  
+  [1X1.2-11 IsEqualOrbit[101X
+  
+  [33X[1;0Y[29X[2XIsEqualOrbit[102X( [3Xorbit1[103X, [3Xorbit2[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if the two orbits are equal else returns [9Xfail[109X.[133X
+  
+  [1X1.2-12 SelectTuple[101X
+  
+  [33X[1;0Y[29X[2XSelectTuple[102X( [3Xorbit[103X, [3Xindex[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe tuple [10Xorbit.TupleTable[index].tuple[110X.[133X
+  
+  [1X1.2-13 NumberGeneratingTuples[101X
+  
+  [33X[1;0Y[29X[2XNumberGeneratingTuples[102X( [3Xgroup[103X, [3Xpartition[103X, [3Xtuple[103X, [3Xgenus[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe  total  number of possible generating tuples for the group and
+            tuple.[133X
+  
+  [1X1.2-14 TotalNumberTuples[101X
+  
+  [33X[1;0Y[29X[2XTotalNumberTuples[102X( [3Xgroup[103X, [3Xtuple[103X, [3Xgenus[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe total number of tuples we have to account for.[133X
+  
+  [1X1.2-15 CalculateTuplePartition[101X
+  
+  [33X[1;0Y[29X[2XCalculateTuplePartition[102X( [3Xgroup[103X, [3Xtuple[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA partition of [23X{1,\ldots, r}[123X where [23Xr[123X is the length of the tuple.[133X
+  
+  [33X[0;0YThe  function  returns a partition of [23X{1,\ldots, r}[123X such that [22Xi[122X and [22Xj[122X lie in
+  the  same block if and only if the elements [10Xtuple[i][110X and [10Xtuple[j][110X are member
+  of  the  same  conjugacy  class.  The  program  currently  requires that the
+  elements  of  the tuple be ordered such that if [10Xtuple[i][110X and [10Xtuple[j][110X are in
+  the same conjugacy class with [22Xi le j[122X then so is[10Xtuple[k][110X for all [22Xi le k le j[122X.[133X
+  
+  [1X1.2-16 RestoreOrbitFromFile[101X
+  
+  [33X[1;0Y[29X[2XRestoreOrbitFromFile[102X( [3Xn[103X, [3Xname[103X[, [3Xpath[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe n-th orbit record from the project with project [10X"name"[110X[133X
+  
+  [33X[0;0YBy default the function searches the current working directory for the saved
+  project folder and searches inside this for the n-th orbit. If no such orbit
+  exists  it  returns  [9Xfail[109X.  If an optional argument [3Xpath[103X is provided then it
+  searches  this  path  for  a  folder with the name specified (note that path
+  expects  a  [10XDirectory[110X  object).  If an orbit exists then it is returned as a
+  record as outlined in the data structure section.[133X
+  
+  [1X1.2-17 SaveOrbitToFile[101X
+  
+  [33X[1;0Y[29X[2XSaveOrbitToFile[102X( [3Xorbit[103X, [3Xn[103X, [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YSaves the orbit to filename "[3Xn[103X" in the directory [10X'_name'[110X. The directory must
+  already exist.[133X
+  
+  
+  [1X1.3 [33X[0;0YKey Data Structures[133X[101X
+  
+  [33X[0;0YMany  of  the above functions require or return key data structures which we
+  aim to document.[133X
+  
+  
+  [1X1.3-1 [33X[0;0YThe Orbit Record[133X[101X
+  
+  [33X[0;0YMany  of the functions return or expect an orbit "object". This object is in
+  fact record with the following values:[133X
+  
+  [30X    [33X[0;6Y[10XPrincipalFiniteGroup [110X- the finite group[133X
+  
+  [30X    [33X[0;6Y[10XOurG [110X- genus[133X
+  
+  [30X    [33X[0;6Y[10XOurR [110X- length of our primary tuple[133X
+  
+  [30X    [33X[0;6Y[10XOurN [110X- number of points on which our group acts[133X
+  
+  [30X    [33X[0;6Y[10XNumberOfGenerators [110X- 2 [10XOurG[110X+ [10XOurR [110X[133X
+  
+  [30X    [33X[0;6Y[10XOurFreeGroup [110X- a free group on [10XNumberOfGenerators [110Xletters[133X
+  
+  [30X    [33X[0;6Y[10XAbsGens [110X- generators for [10XOurFreeGroup[110X[133X
+  
+  [30X    [33X[0;6Y[10XOurAlpha  [110X  -  generators of [10XOurFreeGroup[110Xcorresponding to the [22Xα_i[122X type
+        loops in the fundamental group ( the first [22Xg[122X elements of [10XAbsGens[110X)[133X
+  
+  [30X    [33X[0;6Y[10XOurBeta [110X- elements of [10XOurFreeGroup [110Xcorresponding to [22Xβ[122X type loops[133X
+  
+  [30X    [33X[0;6Y[10XOurGamma  [110X-  generators  of  [10XOurFreeGroup  [110Xcorresponding  to the loops
+        around branch points[133X
+  
+  [30X    [33X[0;6Y[10XTupleTable [110X- a table containing all the tuples in the orbit[133X
+  
+  [30X    [33X[0;6Y[10XHashLength[110X[133X
+  
+  [30X    [33X[0;6Y[10XHash[110X[133X
+  
+  [30X    [33X[0;6Y[10XPrimeCode[110X[133X
+  
+  [30X    [33X[0;6Y[10XOurAction[110X[133X
+  
+  [30X    [33X[0;6Y[10XActionOnOrbit[110X[133X
+  
+  [30X    [33X[0;6Y[10XMinimizationTree[110X- minimization structure[133X
+  
+  [30X    [33X[0;6Y[10XMinimumSet[110X- minimizaton structure[133X
+  
+  
+  [1X1.3-2 [33X[0;0YThe Tuple Table[133X[101X
+  
+  [33X[0;0YThe  tuple  table  is  a list. Each element of the list is a record with the
+  names,    tuple   and   next.   If   [10Xorbit[110X   is   an   orbit   object   then
+  [10Xorbit.TupleTable[n].tuple[110X returns the tuple at index [22Xn[122X of the tuple table.[133X
+  
+  
+  [1X1.4 [33X[0;0YA Sample Session[133X[101X
+  
+  [33X[0;0YWe demonstate how one might use the package.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xgroup:=AlternatingGroup(5);[127X[104X
+    [4X[28XAlt( [ 1 .. 5 ] )[128X[104X
+    [4X[25Xgap>[125X [27Xtuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ];[127X[104X
+    [4X[28X[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ][128X[104X
+    [4X[25Xgap>[125X [27Xorbits:=AllMCOrbits(group,1,tuple);;[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XTotal Number of Tuples: 189120[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCollecting 20 random tuples... done[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning done; 20 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XOrbit 1:[128X[104X
+    [4X[28X																	  [128X[104X
+    [4X[28XLength=3072[128X[104X
+    [4X[28XGenerating Tuple  =[ (1,2,4,5,3), (1,4,5,2,3), (1,2)(4,5),[128X[104X
+    [4X[28X(1,4)(2,3), (2,5)(3,4) ][128X[104X
+    [4X[28XGenerated subgroup size=60[128X[104X
+    [4X[28XCentralizer size=1[128X[104X
+    [4X[28X4800 tuples remaining[128X[104X
+    [4X[28XCleaning current orbit...[128X[104X
+    [4X[28XCleaning a list of 20 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 0[128X[104X
+    [4X[28XCleaning done; 0 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCollecting 20 random tuples... done[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning orbit 1[128X[104X
+    [4X[28XCleaning a list of 20 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 0[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning done; 0 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCollecting 40 random tuples... done[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning orbit 1[128X[104X
+    [4X[28XCleaning a list of 40 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 3[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning done; 3 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XOrbit 2:[128X[104X
+    [4X[28X																	  [128X[104X
+    [4X[28XLength=32[128X[104X
+    [4X[28XGenerating Tuple  =[ (1,4)(2,3), (1,2)(3,4), (1,4)(2,3), (1,2)(3,4),[128X[104X
+    [4X[28X(1,3)(2,4) ][128X[104X
+    [4X[28XGenerated subgroup size=4[128X[104X
+    [4X[28XCentralizer size=4[128X[104X
+    [4X[28X4320 tuples remaining[128X[104X
+    [4X[28XCleaning current orbit...[128X[104X
+    [4X[28XCleaning a list of 3 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 2[128X[104X
+    [4X[28XCleaning done; 2 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XOrbit 3:[128X[104X
+    [4X[28X																	  [128X[104X
+    [4X[28XLength=72[128X[104X
+    [4X[28XGenerating Tuple  =[ (1,5,2), (1,3,2), (1,2)(3,5), (1,3)(2,5),[128X[104X
+    [4X[28X(1,3)(2,5) ][128X[104X
+    [4X[28XGenerated subgroup size=12[128X[104X
+    [4X[28XCentralizer size=1[128X[104X
+    [4X[28X0 tuples remaining[128X[104X
+    [4X[28XCleaning current orbit...[128X[104X
+    [4X[28XCleaning a list of 2 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 0[128X[104X
+    [4X[28XCleaning done; 0 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27X# Check we have as many orbits as it says...[127X[104X
+    [4X[25Xgap>[125X [27XLength(orbits);[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27X# Inspect the first orbit..[127X[104X
+    [4X[25Xgap>[125X [27Xorb1:=orbits[1];;[127X[104X
+    [4X[25Xgap>[125X [27X# How long is orb1?[127X[104X
+    [4X[25Xgap>[125X [27XLength(orb1.TupleTable);[127X[104X
+    [4X[28X3072[128X[104X
+    [4X[25Xgap>[125X [27X# Select element 42 ...[127X[104X
+    [4X[25Xgap>[125X [27XSelectTuple(orb1, 42);[127X[104X
+    [4X[28X[ (1,3,4), (1,5,3,2,4), (1,5)(2,4), (1,2)(3,5), (2,3)(4,5) ][128X[104X
+    [4X[25Xgap>[125X [27X# Save the orbit to a file...[127X[104X
+    [4X[25Xgap>[125X [27XSaveOrbitToFile(orb1, 1, "test");[127X[104X
+    [4X[25Xgap>[125X [27X#If the folder doesn't exist we get an error..[127X[104X
+    [4X[25Xgap>[125X [27XSaveOrbitToFile(orb1, 1, "foo");[127X[104X
+    [4X[28XAppendTo: cannot open '_foo/1' for output at[128X[104X
+    [4X[28XCallFuncList( APPEND_TO, arg );[128X[104X
+    [4X[25Xgap>[125X [27X#[127X[104X
+    [4X[25Xgap>[125X [27X# Now we try find generating orbits [127X[104X
+    [4X[25Xgap>[125X [27Xgroup:=SymmetricGroup(5);[127X[104X
+    [4X[28XSym( [ 1 .. 5 ] )[128X[104X
+    [4X[25Xgap>[125X [27X# And we will save them using the `SaveOrbit` option[127X[104X
+    [4X[25Xgap>[125X [27XGeneratingMCOrbits(group,1,tuple : SaveOrbit:="example");;[127X[104X
+    [4X[28X[128X[104X
+    [4X[28XTotal Number of Tuples: 607680[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCollecting 20 generating tuples .. done[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCleaning done; 20 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XOrbit 1:                    [128X[104X
+    [4X[28XLength=5064[128X[104X
+    [4X[28XGenerating Tuple  =[ (1,3,2,5), (2,4,3), (1,4)(3,5), (1,3)(2,5),[128X[104X
+    [4X[28X(1,4)(3,5) ][128X[104X
+    [4X[28XGenerated subgroup size=120[128X[104X
+    [4X[28XSaving orbit to file _example/0[128X[104X
+    [4X[28XCentralizer size=1[128X[104X
+    [4X[28X0 tuples remaining[128X[104X
+    [4X[28XCleaning current orbit...[128X[104X
+    [4X[28XCleaning a list of 20 tuples[128X[104X
+    [4X[28XRandom Tuples Remaining: 0[128X[104X
+    [4X[28XCleaning done; 0 random tuples remaining[128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27Xgeneratingorbits:=last;;[127X[104X
+    [4X[25Xgap>[125X [27X# How many generating orbits are there?[127X[104X
+    [4X[25Xgap>[125X [27XLength(generatingorbits);[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27X# Is this orbit equal to the other one we found earlier[127X[104X
+    [4X[25Xgap>[125X [27XIsEqualOrbit(orb1, generatingorbits[1]);[127X[104X
+    [4X[28Xfail[128X[104X
+    [4X[25Xgap>[125X [27X# We can reload the orbits...[127X[104X
+    [4X[25Xgap>[125X [27Xorb2:=RestoreOrbitFromFile(0, "example");;[127X[104X
+    [4X[25Xgap>[125X [27XLength(orb2.TupleTable);[127X[104X
+    [4X[28X5064[128X[104X
+    [4X[28X    [128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.5 [33X[0;0YAn Application[133X[101X
+  
+  [33X[0;0YThis section describes an application of the package.[133X
+  
+  [33X[0;0YLet  [22XX[122X  be  a  compact  Riemann  surface  of  genus  [22Xg[122X  and [22Xf: X → P^1C[122X be a
+  meromorphic  function  of  degree [22Xn[122X. Let [22XB[122X be the set of branch points for [22Xf[122X
+  and fix a basepoint [22Xb_0 ∈ P^1C- B[122X. The fundamental group [22Xπ_1(P^1 C - B, b_0)[122X
+  acts  transitively  on  the  fibre  [22Xf^-1(b_0)[122X  and  this  corresponds  to  a
+  representation[133X
+  
+  
+  [24X[33X[0;6Yf^* :\pi_1(\mathbb{P}^1 \mathbb{C} - B, b_0) \rightarrow S_n[133X
+  
+  [124X
+  
+  [33X[0;0YThe  image  of  [22Xf^*[122X is called the [13Xmonodromy group[113X of [22X(X, f)[122X. The fundamental
+  group  of  the  punctured Riemann sphere is generated by the loops that wind
+  around  the  points in [22XB[122X. Label the branch points [22Xb_1,...,b_r[122X and let [22Xτ_i[122X be
+  the image under [22Xf^*[122X of the loop, [22Xγ_i ∈ π_1(P^1C - B)[122X, that winds once around
+  the point [22Xb_i∈ B[122X. Therefore,[133X
+  
+  
+  [24X[33X[0;6Y\langle \tau_1, ..., \tau_r \rangle = G[133X
+  
+  [124X
+  
+  [33X[0;0Yand[133X
+  
+  
+  [24X[33X[0;6Y\tau_1 \cdots \tau_r = 1[133X
+  
+  [124X
+  
+  [33X[0;0YMoreover by the Riemann-Hurwitz formula[133X
+  
+  
+  [24X[33X[0;6Y2(n+g-1) = \sum_1^r {ind}( \tau_i)[133X
+  
+  [124X
+  
+  [33X[0;0Ywhere  the  [22Xind(τ_i)[122X  is  the  minimal number of factors to express [22Xτ_i[122X as a
+  product of transpositions. A set [22Xt_1, ..., t_r[122X of elements of [22XS_n[122X satisfying
+  the  Riemann-Hurwitz formula, the product-one condition, and generating some
+  transitive  subgroup [22XG[122X of [22XS_n[122X is called a [13Xgenus [113X [22Xg[122X [13Xgenerating system [113X for [22XG[122X.
+  Therefore  to the meromorphic function [22X(X, f)[122X there is an associated genus [22Xg[122X
+  system.  In  fact  the  conjugacy  classes  of  the  elements  [22Xτ_i[122X  are also
+  determined  by  [22Xf[122X -- the collection of conjugacy classes is sometimes called
+  the  [13X ramification type[113X of [22Xf[122X. On the other hand for every genus [22Xg[122X generating
+  system,  [22Xt = (τ_1, ..., τ_n)[122X for [22XG[122X there is Riemann surface of genus [22Xg[122X and a
+  meromorphic  function  with associated generating system [22Xt[122X -- this result is
+  known as [13X Riemann's Existence Theorem[113X.[133X
+  
+  [33X[0;0YThe  question  we  hope  to use our package to answer is: For a given finite
+  group  [22XG[122X  how many meromorphic maps with monodromy group [22XG[122X are there? It can
+  be  shown -- see [V\t96] for example -- that determining whether two genus [22Xg[122X
+  coverings are equivalent corresponds to determining whether their associated
+  genus  [22Xg[122X systems are in the same mapping class orbit ( most literature would
+  refer to mapping class orbits as braid orbits in this case - this is because
+  of  the  equivalence between the mapping class group of a punctured disc and
+  the braid groups [Bir75]).[133X
+  
+  [33X[0;0YThus  for  a finite group [22XG[122X we can answer the above principal question using
+  the following process:[133X
+  
+  [30X    [33X[0;6YFor  a  given finite group [22XG[122X the work of Breuer [Bre00] can be used to
+        calculate all possible ramification types.[133X
+  
+  [30X    [33X[0;6YPick  a  tuple,  [22XC  = (c_1,...,c_r)[122X, of representative elements of the
+        conjugacy  classes  which  correspond to a chosen ramification type as
+        calculated in the previous step.[133X
+  
+  [30X    [33X[0;6YUse  the  function  [10XGeneratingMCOrbits(G, 0, [c1,...,cr])[110X to calculate
+        the  number of mapping class orbits. Note that the genus argument is [22X0[122X
+        because this is the genus of [22XP^1C[122X.[133X
+  
+  [33X[0;0YFor  more information on this process and the underlying theory see [MSSV02]
+  and [V\t96].[133X
+  
