@@ -13,19 +13,16 @@ Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
     <TitlePage>
         <Title>MapClass</Title>
         <Author> Adam James
-            <Email>jamesa@maths.bham.ac.uk</Email>
         </Author>
         <Author> Kay Magaard
-            <Email>K.Magaard@maths.bham.ac.uk</Email>
         </Author>
         <Author> Sergey Shpectorov
             <Email>s.shpectorov@bham.ac.uk</Email>
         </Author>
         <Author> Helmut Völklein
-            <Email>voelkle@iem.uni-due.de</Email>
         </Author>
-        <Date>October 2011</Date>
-        <Copyright> &copyright; 2004-2011 by Adam James, Kay Magaard 
+        <Date>September 2018</Date>
+        <Copyright> &copyright; 2004-2018 by Adam James, Kay Magaard 
           Sergey Shpectorov, and Helmut Völklein <P/>
           MapClass is free software you can redistribute it and/or modify it
           under the terms of the GNU General Public License as published by the

@@ -5,7 +5,7 @@ the mapping class group orbits for a given finite group.
 
 The package can be found at its website 
 
-http://web.mat.bham.ac.uk/~jamesa/mapclass/
+https://gap-packages.github.io/MapClass
 
 or via the Packages links from the GAP website
 

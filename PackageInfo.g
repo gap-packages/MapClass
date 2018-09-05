@@ -32,63 +32,25 @@ Subtitle := "A Package For Mapping Class Orbit Computation",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "1.3",
+Version := "1.4.0",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 ##
-Date := "21/07/2011",
+Date := "05/09/2018",
 
-##  URL of the archive(s) of the current package release, but *without*
-##  the format extension(s), like '.zoo', which are given next.
-##  The archive file name *must be changed* with each version of the archive
-##  (and probably somehow contain the package name and version).
-##  The paths of the files in the archive must begin with the name of the
-##  directory containing the package (in our "example" probably:
-##  example/init.g, ...    or  example-1.3/init.g, ...  )
-# 
-ArchiveURL := 
-          "http://web.mat.bham.ac.uk/~jamesa/mapclass/download/mapclass-1.1",
-
-##  All provided formats as list of file extensions, separated by white
-##  space or commas.
-##  Currently recognized formats are:
-##      .zoo       the (GAP-traditional) zoo-format with "!TEXT!" comments 
-##                 for text files
-##      .tar.gz    the UNIX standard
-##      .tar.bz2   compressed with 'bzip2', often smaller than with gzip
-##      -win.zip   zip-format for DOS/Windows, text files must have DOS 
-##                 style line breaks (CRLF)
-##  
-##  In the future we may also provide .deb or .rpm formats which allow
-##  a convenient installation and upgrading on Linux systems.
-##  
-# ArchiveFormats := ".zoo", # the others are generated automatically
-ArchiveFormats := ".tar.gz, .tar.bz2, -win.zip",
-
-##  If not all of the archive formats mentioned above are provided, these 
-##  can be produced at the GAP side. Therefore it is necessary to know which
-##  files of the package distribution are text files which should be unpacked
-##  with operating system specific line breaks. There are the following 
-##  possibilities to specify the text files:
-##  
-##    - specify below a component 'TextFiles' which is a list of names of the 
-##      text files, relative to the package root directory (e.g., "lib/bla.g")
-##    - specify below a component 'BinaryFiles' as list of names, then all other
-##      files are taken as text files.
-##    - if no 'TextFiles' or 'BinaryFiles' are given and a .zoo archive is
-##      provided, then the files in that archive with a "!TEXT!" comment are
-##      taken as text files
-##    - otherwise: exactly the files with names matching the regular expression
-##      ".*\(\.txt\|\.gi\|\.gd\|\.g\|\.c\|\.h\|\.htm\|\.html\|\.xml\|\.tex\|\.six\|\.bib\|\.tst\|README.*\|INSTALL.*\|Makefile\)"
-##      are taken as text files
-##  
-##  (Remark: Just providing a .tar.gz file will often result in useful
-##  archives)
-##  
-##  These entries are *optional*.
-#TextFiles := ["init.g", ......],
-#BinaryFiles := ["doc/manual.dvi", ......],
-
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", ~.PackageName ),
+README_URL      := Concatenation( ~.PackageWWWHome, "/README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
+                                 
+ArchiveFormats := ".tar.gz",
 
 ##  Information about authors and maintainers is contained in the `Persons'
 ##  field which is a list of records, one record for each person; each 
@@ -126,33 +88,13 @@ Persons := [
     LastName      := "James",
     FirstNames    := "Adam",
     IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "jamesa@maths.bham.ac.uk",
-    WWWHome       := "www.mat.bham.ac.uk",
-    PostalAddress := Concatenation( [
-                       "School of Mathematics\n",
-                       "University of Birmingham\n",
-                       "Edgbaston\n",
-                       "Birmingham, B15 2TT\n",
-                       "United Kingdom"] ),
-    Place         := "Birmingham",
-    Institution   := "University of Birmingham"
+    IsMaintainer  := false,
   ),
   rec( 
     LastName      := "Magaard",
     FirstNames    := "Kay",
     IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "K.Magaard@bham.ac.uk",
-    WWWHome       := "http://mat.bham.ac.uk/staff/magaardk.shtml",
-    PostalAddress := Concatenation( [
-                       "School of Mathematics\n",
-                       "University of Birmingham\n",
-                       "Edgbaston\n",
-                       "Birmingham, B15 2TT\n",
-                       "United Kingdom"] ),
-    Place         := "Birmingham",
-    Institution   := "University of Birmingham"
+    IsMaintainer  := false
   ),
   rec( 
     LastName      := "Shpectorov",
@@ -160,7 +102,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "S.Shpectorov@bham.ac.uk",
-    WWWHome       := "http://web.mat.bham.ac.uk/S.Shpectorov/index.html",
+    WWWHome       := "https://web.mat.bham.ac.uk/S.Shpectorov/index.html",
     PostalAddress := Concatenation( [
                        "School of Mathematics\n",
                        "University of Birmingham\n",
@@ -174,16 +116,7 @@ Persons := [
     LastName      := "Volklein",
     FirstNames    := "Helmut",
     IsAuthor      := true,
-    Email         := "voelkle@iem.uni-due.de",
-    WWWHome       := "http://www.iem.uni-due.de/algebra/people/voelklein.html",
-    PostalAddress := Concatenation( [
-                       "Institut fur Experimentelle Mathematik\n",
-                       "Universitat Duisburg-Essen\n",
-                       "Ellernstrasse 29\n",
-                       "45326 Essen\n",
-                       "Germany"] ),
-    Place         := "Essen",
-    Institution   := "Universitat Duisburg-Essen"
+    IsMaintainer  := false,
   )
 ],
 
@@ -206,21 +139,6 @@ CommunicatedBy := "Leonard Soicher (QMUL)",
 # AcceptDate := "08/1999",
 AcceptDate := "11/2011",
 
-##  For a central overview of all packages and a collection of all package
-##  archives it is necessary to have two files accessible which should be
-##  contained in each package:
-##     - A README file, containing a short abstract about the package
-##       content and installation instructions.
-##     - The PackageInfo.g file you are currently reading or editing!
-##  You must specify URLs for these two files, these allow to automate 
-##  the updating of package information on the GAP Website, and inclusion
-##  and updating of the package in the GAP distribution.
-#
-README_URL := 
-  "web.mat.bham.ac.uk/~jamesa/mapclass/README.md",
-PackageInfoURL := 
-  "web.mat.bham.ac.uk/~jamesa/mapclass/PackageInfo.g",
-
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
 ##  for a Webpage with more detailed information about the package
@@ -234,9 +152,7 @@ PackageInfoURL :=
 AbstractHTML := 
   "The <span class=\"pkgname\">MapCLass</span> package calculates the \
    mapping class group orbits for a given finite group.",
-
-PackageWWWHome := "http://web.mat.bham.ac.uk/~jamesa/mapclass/",
-               
+              
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
 ##  documentation on the GAP website.
@@ -268,10 +184,7 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "MapClass",
   LongTitle := "Documentation for MapClass Package",
-  # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-      "http://web.mat.bham.ac.uk/~jamesa/mapclass/mapclassdoc.tar.gz",
-  #ArchiveURLSubset := ["doc"],
+  ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
@@ -289,7 +202,7 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.4",
+  GAP := ">=4.9",
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
@@ -346,19 +259,19 @@ AvailabilityTest := ReturnTrue,
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  MapClass Dev Beta", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-        " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "For help, type: ?MapClass: \n",
-  "----------------------------------------------------------------\n" ),
+# BannerString := Concatenation( 
+#   "----------------------------------------------------------------\n",
+#   "Loading  MapClass Dev Beta", ~.Version, "\n",
+#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#         " (", ~.Persons[1].WWWHome, ")\n",
+#   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#         " (", ~.Persons[2].WWWHome, ")\n",
+#   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+#         " (", ~.Persons[3].WWWHome, ")\n",
+#   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+#         " (", ~.Persons[4].WWWHome, ")\n",
+#   "For help, type: ?MapClass: \n",
+#   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
