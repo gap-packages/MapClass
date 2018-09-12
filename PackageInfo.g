@@ -32,11 +32,11 @@ Subtitle := "A Package For Mapping Class Orbit Computation",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "1.4.0",
+Version := "1.4.1",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 ##
-Date := "05/09/2018",
+Date := "12/09/2018",
 
 SourceRepository := rec(
     Type := "git",
@@ -150,7 +150,7 @@ AcceptDate := "11/2011",
 # computing the Smith normal form of integer matrices and some related \
 # utilities.",
 AbstractHTML := 
-  "The <span class=\"pkgname\">MapCLass</span> package calculates the \
+  "The <span class=\"pkgname\">MapClass</span> package calculates the \
    mapping class group orbits for a given finite group.",
               
 ##  Here is the information on the help books of the package, used for
