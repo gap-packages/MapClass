@@ -81,7 +81,7 @@ InstallGlobalFunction(RandomGeneratingTuple,function(group, tuple, OurG, OurR)
   local i, k, t, product, c;
   while true do
     t:=List([1..2*OurG], x-> Random(group));
-    product:=Product(List([1..OurG], x->Comm(t[x], t[OurG+x])));
+    product:=Product(List([1..OurG], x->Comm(t[x], t[OurG+x])),One(group));
     if OurR=0 then
       if product=One(group) then
         return rec(tuple:=t, subgroupNumber:=1);
@@ -98,7 +98,6 @@ InstallGlobalFunction(RandomGeneratingTuple,function(group, tuple, OurG, OurR)
         if Size(Subgroup(group,t))= Size(group) then
           return rec(tuple:=t, subgroupNumber:=1);
         fi;
-        
       fi;
     fi;
   od;
