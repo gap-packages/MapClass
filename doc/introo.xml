@@ -407,7 +407,7 @@
     </Section>
     <Section><Heading>A Sample Session</Heading>
         We demonstate how one might use the package.
-    <Example><![CDATA[
+    <Log><![CDATA[
 gap> group:=AlternatingGroup(5);
 Alt( [ 1 .. 5 ] )
 gap> tuple:=[ (1,2)(3,4), (1,2)(3,4), (1,2)(3,4) ];
@@ -538,7 +538,7 @@ gap> # We can reload the orbits...
 gap> orb2:=RestoreOrbitFromFile(0, "example");;
 gap> Length(orb2.TupleTable);
 5064
-    ]]></Example>
+    ]]></Log>
     </Section>
     <Section Label="sec:application"><Heading>An Application</Heading>
         This section describes an application of the package. <P/>
