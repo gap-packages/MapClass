@@ -32,11 +32,11 @@ Subtitle := "A Package For Mapping Class Orbit Computation",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "1.4.2",
+Version := "1.4.3",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 ##
-Date := "13/09/2018",
+Date := "15/09/2018",
 
 SourceRepository := rec(
     Type := "git",
@@ -183,7 +183,7 @@ AbstractHTML :=
 PackageDoc := rec(
   # use same as in GAP            
   BookName  := "MapClass",
-  LongTitle := "Documentation for MapClass Package",
+  LongTitle := "A Package For Mapping Class Orbit Computation",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -250,28 +250,6 @@ AvailabilityTest := ReturnTrue,
 ##      # since the hello binary is not vital we return ...
 ##      return true;
 ##    end,
-
-##  *Optional*: path relative to package root to a file which 
-##  shall be read immediately before the package is loaded.
-#PreloadFile := "...",
-
-##  The LoadPackage mechanism can produce a default banner from the info
-##  in this file. If you are not happy with it, you can provide a string
-##  here that is used as a banner. GAP decides when the banner is shown and
-##  when it is not shown. *optional* (note the ~-syntax in this example)
-# BannerString := Concatenation( 
-#   "----------------------------------------------------------------\n",
-#   "Loading  MapClass Dev Beta", ~.Version, "\n",
-#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-#         " (", ~.Persons[1].WWWHome, ")\n",
-#   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-#         " (", ~.Persons[2].WWWHome, ")\n",
-#   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-#         " (", ~.Persons[3].WWWHome, ")\n",
-#   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-#         " (", ~.Persons[4].WWWHome, ")\n",
-#   "For help, type: ?MapClass: \n",
-#   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
