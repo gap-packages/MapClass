@@ -35,7 +35,7 @@ Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
     <TableOfContents/>
 
     <Body>
-        <#Include SYSTEM "introo.xml">
+        <#Include SYSTEM "intro.xml">
     </Body>
     <Appendix><Heading>Installation</Heading>
         To Install the package place the "MapClass" folder into your GAP system's
