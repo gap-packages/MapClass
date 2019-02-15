@@ -36,7 +36,8 @@ Version := "1.4.4",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 ##
-Date := "02/12/2018",
+Date := "02/12/2018", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 SourceRepository := rec(
     Type := "git",
