@@ -12,7 +12,7 @@
 
 ##  For the LoadPackage mechanism in GAP >= 4.4 only the entries
 ##  .PackageName, .Version, .PackageDoc, .Dependencies, .AvailabilityTest
-##  .Autoload   are needed. The other entries are relevant if the
+##  are needed. The other entries are relevant if the
 ##  package shall be distributed for other GAP users, in particular if it
 ##  shall be redistributed via the GAP Website.
 
@@ -162,8 +162,6 @@ AbstractHTML :=
 ##       - the name of the book (.BookName)
 ##       - a long title, shown by ?books (.LongTitle, optional)
 ##       - the path to the manual.six file for this book (.SixFile)
-##       - a decision if the book should be (auto)loaded, probably 'true'
-##         (.Autoload)
 ##  
 ##  For an online version on a Web page further entries are needed, 
 ##  if possible, provide an HTML- and a PDF-version:
@@ -192,9 +190,6 @@ PackageDoc := rec(
   SixFile   := "doc/manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
-  # Should this help book be autoloaded when GAP starts up? This should
-  # usually be 'true', otherwise say 'false'. 
-  Autoload  := true
 ),
 
 
@@ -251,12 +246,6 @@ AvailabilityTest := ReturnTrue,
 ##      # since the hello binary is not vital we return ...
 ##      return true;
 ##    end,
-
-##  Suggest here if the package should be *automatically loaded* when GAP is 
-##  started.  This should usually be 'false'. Say 'true' only if your package 
-##  provides some improvements of the GAP library which are likely to enhance 
-##  the overall system performance for many users.
-Autoload := false,
 
 ##  *Optional*, but recommended: path relative to package root to a file which 
 ##  contains as many tests of the package functionality as sensible.
