@@ -3,21 +3,9 @@
 ##  PackageInfo.g for the package `MapClass'                     
 ##  2011 - A. James S.Shpectorov K.Magaard
 ##                                                              
-##  (created from Frank Lübeck's PackageInfo.g template file)
-##  
-##  
 ##  This file contains meta-information on the package. It is used by
 ##  the package loading mechanism and the upgrade mechanism for the
 ##  redistribution of the package via the GAP website.
-
-##  For the LoadPackage mechanism in GAP >= 4.4 only the entries
-##  .PackageName, .Version, .PackageDoc, .Dependencies, .AvailabilityTest
-##  are needed. The other entries are relevant if the
-##  package shall be distributed for other GAP users, in particular if it
-##  shall be redistributed via the GAP Website.
-
-##  With a new release of the package at least the entries .Version, .Date and
-##  .ArchiveURL must be updated.
 
 SetPackageInfo( rec(
 
@@ -53,37 +41,6 @@ ArchiveURL      := Concatenation( ~.SourceRepository.URL,
                                  
 ArchiveFormats := ".tar.gz",
 
-##  Information about authors and maintainers is contained in the `Persons'
-##  field which is a list of records, one record for each person; each 
-##  person's record should be as per the following example: 
-##  
-##     rec(
-##     # these are compulsory, characters are interpreted as latin-1, so
-##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
-##     FirstNames := "Fritz Eduard",
-##  
-##     # At least one of the following two entries must be given and set 
-##     # to 'true' (an entry can be left out if value is not 'true'):
-##     IsAuthor := true;
-##     IsMaintainer := true;
-##  
-##     # At least one of the following three entries must be given.
-##     # - preferably email address and WWW homepage
-##     # - postal address not needed if email or WWW address available
-##     # - if no contact known, specify postal address as "no address known"
-##     Email := "Mueller@no.org",
-##     # complete URL, starting with protocol
-##     WWWHome := "http://www.no.org/~Mueller",
-##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
-##     12345 Notown\nNocountry"
-##     
-##     # If you want, add one or both of the following entries (*optional*)
-##     Place := "Notown",
-##     Institution := "Institute for Nothing"
-##     )
-##  
 Persons := [
   rec( 
     LastName      := "James",
