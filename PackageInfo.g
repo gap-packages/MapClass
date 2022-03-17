@@ -3,7 +3,7 @@
 ##  PackageInfo.g for the package `MapClass'                     
 ##  2011 - A. James S.Shpectorov K.Magaard
 ##                                                              
-##  (created from Frank Lübeck's PackageInfo.g template file)
+##  (created from Frank LÃ¼beck's PackageInfo.g template file)
 ##  
 ##  
 ##  This file contains meta-information on the package. It is used by
@@ -60,7 +60,7 @@ ArchiveFormats := ".tar.gz",
 ##     rec(
 ##     # these are compulsory, characters are interpreted as latin-1, so
 ##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
+##     LastName := "MÃ¼ller",
 ##     FirstNames := "Fritz Eduard",
 ##  
 ##     # At least one of the following two entries must be given and set 
@@ -76,7 +76,7 @@ ArchiveFormats := ".tar.gz",
 ##     # complete URL, starting with protocol
 ##     WWWHome := "http://www.no.org/~Mueller",
 ##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
+##     PostalAddress := "Dr. F. MÃ¼ller\nNo Org Institute\nNo Place 13\n\
 ##     12345 Notown\nNocountry"
 ##     
 ##     # If you want, add one or both of the following entries (*optional*)
