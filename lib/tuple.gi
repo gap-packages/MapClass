@@ -21,7 +21,7 @@ InstallGlobalFunction(SuggestTuple,function(tu, PrincipalFiniteGroup, PrincipalT
     return false;
   fi;
   od;
-if Product(List([1..OurG],x->Comm(tu[2*x-1],tu[2*x])))*
+if Product([1..OurG],x->Comm(tu[2*x-1],tu[2*x]))*
     Product(tu{[2*OurG+1..NumberOfGenerators]})<>
     One(PrincipalFiniteGroup) then
     Print("\n\nTuple cannot be accepted!!\n\n");
@@ -47,7 +47,7 @@ InstallGlobalFunction(RandomSubgroupTuple,function(OurG,OurR,SubgroupRecord)
   else   
    while true do 
     T:=List([1..2*OurG],x->Random(s.subgroup));
-    p:=Product(List([1..OurG],x->Comm(T[x],T[OurG+x])));
+    p:=Product([1..OurG],x->Comm(T[x],T[OurG+x]),One(s.subgroup));
     if OurR=0 then
      if p=One(s.subgroup) then
       return rec(tuple:=T,subgroupNumber:=i);
@@ -81,7 +81,7 @@ InstallGlobalFunction(RandomGeneratingTuple,function(group, tuple, OurG, OurR)
   local i, k, t, product, c;
   while true do
     t:=List([1..2*OurG], x-> Random(group));
-    product:=Product(List([1..OurG], x->Comm(t[x], t[OurG+x])),One(group));
+    product:=Product([1..OurG], x->Comm(t[x], t[OurG+x]),One(group));
     if OurR=0 then
       if product=One(group) then
         return rec(tuple:=t, subgroupNumber:=1);
