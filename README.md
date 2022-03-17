@@ -12,7 +12,7 @@ https://gap-packages.github.io/MapClass
 
 or via the Packages links from the GAP website
 
-http://www.gap-system.org/
+https://www.gap-system.org/
 
 The MapClass package is redistributed with GAP. If you need to install
 a newer version of the package than the one that is redistributed with
@@ -20,7 +20,7 @@ GAP, place the entire `MapClass` directory into the `.gap/pkg/` directory.
 
 To use the package, start GAP and type
 
-  LoadPackage("mapclass");
+    LoadPackage("mapclass");
 
 The MapClass package banner should appear on the screen. 
 
