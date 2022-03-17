@@ -3,21 +3,9 @@
 ##  PackageInfo.g for the package `MapClass'                     
 ##  2011 - A. James S.Shpectorov K.Magaard
 ##                                                              
-##  (created from Frank Lübeck's PackageInfo.g template file)
-##  
-##  
 ##  This file contains meta-information on the package. It is used by
 ##  the package loading mechanism and the upgrade mechanism for the
 ##  redistribution of the package via the GAP website.
-
-##  For the LoadPackage mechanism in GAP >= 4.4 only the entries
-##  .PackageName, .Version, .PackageDoc, .Dependencies, .AvailabilityTest
-##  .Autoload   are needed. The other entries are relevant if the
-##  package shall be distributed for other GAP users, in particular if it
-##  shall be redistributed via the GAP Website.
-
-##  With a new release of the package at least the entries .Version, .Date and
-##  .ArchiveURL must be updated.
 
 SetPackageInfo( rec(
 
@@ -32,11 +20,12 @@ Subtitle := "A Package For Mapping Class Orbit Computation",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "1.4.4",
+Version := "1.4.5",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 ##
-Date := "02/12/2018",
+Date := "17/03/2022", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 SourceRepository := rec(
     Type := "git",
@@ -52,37 +41,6 @@ ArchiveURL      := Concatenation( ~.SourceRepository.URL,
                                  
 ArchiveFormats := ".tar.gz",
 
-##  Information about authors and maintainers is contained in the `Persons'
-##  field which is a list of records, one record for each person; each 
-##  person's record should be as per the following example: 
-##  
-##     rec(
-##     # these are compulsory, characters are interpreted as latin-1, so
-##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
-##     FirstNames := "Fritz Eduard",
-##  
-##     # At least one of the following two entries must be given and set 
-##     # to 'true' (an entry can be left out if value is not 'true'):
-##     IsAuthor := true;
-##     IsMaintainer := true;
-##  
-##     # At least one of the following three entries must be given.
-##     # - preferably email address and WWW homepage
-##     # - postal address not needed if email or WWW address available
-##     # - if no contact known, specify postal address as "no address known"
-##     Email := "Mueller@no.org",
-##     # complete URL, starting with protocol
-##     WWWHome := "http://www.no.org/~Mueller",
-##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
-##     12345 Notown\nNocountry"
-##     
-##     # If you want, add one or both of the following entries (*optional*)
-##     Place := "Notown",
-##     Institution := "Institute for Nothing"
-##     )
-##  
 Persons := [
   rec( 
     LastName      := "James",
@@ -161,8 +119,6 @@ AbstractHTML :=
 ##       - the name of the book (.BookName)
 ##       - a long title, shown by ?books (.LongTitle, optional)
 ##       - the path to the manual.six file for this book (.SixFile)
-##       - a decision if the book should be (auto)loaded, probably 'true'
-##         (.Autoload)
 ##  
 ##  For an online version on a Web page further entries are needed, 
 ##  if possible, provide an HTML- and a PDF-version:
@@ -191,9 +147,6 @@ PackageDoc := rec(
   SixFile   := "doc/manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
-  # Should this help book be autoloaded when GAP starts up? This should
-  # usually be 'true', otherwise say 'false'. 
-  Autoload  := true
 ),
 
 
@@ -250,12 +203,6 @@ AvailabilityTest := ReturnTrue,
 ##      # since the hello binary is not vital we return ...
 ##      return true;
 ##    end,
-
-##  Suggest here if the package should be *automatically loaded* when GAP is 
-##  started.  This should usually be 'false'. Say 'true' only if your package 
-##  provides some improvements of the GAP library which are likely to enhance 
-##  the overall system performance for many users.
-Autoload := false,
 
 ##  *Optional*, but recommended: path relative to package root to a file which 
 ##  contains as many tests of the package functionality as sensible.

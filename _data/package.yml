@@ -1,6 +1,6 @@
 name: MapClass
-version: 1.4.4
-date: 2018-12-02
+version: 1.4.5
+date: 2022-03-17
 description: |
     A Package For Mapping Class Orbit Computation
 
@@ -23,7 +23,7 @@ packageinfo: https://gap-packages.github.io/MapClass/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/MapClass/releases/download/v1.4.4/MapClass-1.4.4.tar.gz
+      url: https://github.com/gap-packages/MapClass/releases/download/v1.4.5/MapClass-1.4.5.tar.gz
 
 abstract: |
     The <span class="pkgname">MapClass</span> package calculates the    mapping class group orbits for a given finite group.
@@ -35,28 +35,28 @@ keywords: |
     braid orbit, mapping class orbit, Hurwitz loci.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>JMSV18</span>]   <b class='BibAuthor'>James, A., Magaard, K., Shpectorov, S. and Volklein, H.</b>,
+    [<span class='BibKey'>JMSV22</span>]   <b class='BibAuthor'>James, A., Magaard, K., Shpectorov, S. and Volklein, H.</b>,
      <i class='BibTitle'>MapClass, A Package For Mapping Class Orbit Computation,
-             Version 1.4.4</i>
-     (<span class='BibYear'>2018</span>)<br />
+             Version 1.4.5</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>Refereed GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/MapClass">https://gap-packages.github.io/MapClass</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ MapClass1.4.4,
+    @misc{ MapClass1.4.5,
       author =           {James,  A.  and  Magaard,  K.  and  Shpectorov, S. and
                           Volklein, H.},
       title =            {{MapClass},   A   Package   For  Mapping  Class  Orbit
-                          Computation, {V}ersion 1.4.4},
-      month =            {Dec},
-      year =             {2018},
+                          Computation, {V}ersion 1.4.5},
+      month =            {Mar},
+      year =             {2022},
       note =             {Refereed GAP package},
       howpublished =     {\href        {https://gap-packages.github.io/MapClass}
                           {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{MapClass}}},
       keywords =         {braid orbit; mapping class orbit; Hurwitz loci},
-      printedkey =       {JMSV18}
+      printedkey =       {JMSV22}
     }
 

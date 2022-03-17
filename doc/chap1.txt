@@ -231,7 +231,7 @@
   the  same block if and only if the elements [10Xtuple[i][110X and [10Xtuple[j][110X are member
   of  the  same  conjugacy  class.  The  program  currently  requires that the
   elements  of  the tuple be ordered such that if [10Xtuple[i][110X and [10Xtuple[j][110X are in
-  the same conjugacy class with [22Xi le j[122X then so is[10Xtuple[k][110X for all [22Xi le k le j[122X.[133X
+  the same conjugacy class with [22Xi ≤ j[122X then so is[10Xtuple[k][110X for all [22Xi ≤ k ≤ j[122X.[133X
   
   [1X1.2-16 RestoreOrbitFromFile[101X
   

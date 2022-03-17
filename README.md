@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gap-packages/MapClass.svg?branch=master)](https://travis-ci.org/gap-packages/MapClass)
+[![Build Status](https://github.com/gap-packages/MapClass/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/MapClass/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/MapClass/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/MapClass)
 
 # GAP package mapclass
@@ -12,7 +12,7 @@ https://gap-packages.github.io/MapClass
 
 or via the Packages links from the GAP website
 
-http://www.gap-system.org/
+https://www.gap-system.org/
 
 The MapClass package is redistributed with GAP. If you need to install
 a newer version of the package than the one that is redistributed with
@@ -20,7 +20,7 @@ GAP, place the entire `MapClass` directory into the `.gap/pkg/` directory.
 
 To use the package, start GAP and type
 
-  LoadPackage("mapclass");
+    LoadPackage("mapclass");
 
 The MapClass package banner should appear on the screen. 
 
