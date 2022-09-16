@@ -1,6 +1,6 @@
 name: MapClass
-version: 1.4.5
-date: 2022-03-17
+version: 1.4.6
+date: 2022-09-17
 description: |
     A Package For Mapping Class Orbit Computation
 
@@ -23,13 +23,13 @@ packageinfo: https://gap-packages.github.io/MapClass/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/MapClass/releases/download/v1.4.5/MapClass-1.4.5.tar.gz
+      url: https://github.com/gap-packages/MapClass/releases/download/v1.4.6/MapClass-1.4.6.tar.gz
 
 abstract: |
     The <span class="pkgname">MapClass</span> package calculates the    mapping class group orbits for a given finite group.
 
 status: accepted
-doc-html: doc/chap0.html
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
 keywords: |
     braid orbit, mapping class orbit, Hurwitz loci.
@@ -37,7 +37,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>JMSV22</span>]   <b class='BibAuthor'>James, A., Magaard, K., Shpectorov, S. and Volklein, H.</b>,
      <i class='BibTitle'>MapClass, A Package For Mapping Class Orbit Computation,
-             Version 1.4.5</i>
+             Version 1.4.6</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>Refereed GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/MapClass">https://gap-packages.github.io/MapClass</a></span>.
@@ -45,12 +45,12 @@ citeas: |
     
 
 bibtex: |
-    @misc{ MapClass1.4.5,
+    @misc{ MapClass1.4.6,
       author =           {James,  A.  and  Magaard,  K.  and  Shpectorov, S. and
                           Volklein, H.},
       title =            {{MapClass},   A   Package   For  Mapping  Class  Orbit
-                          Computation, {V}ersion 1.4.5},
-      month =            {Mar},
+                          Computation, {V}ersion 1.4.6},
+      month =            {Sep},
       year =             {2022},
       note =             {Refereed GAP package},
       howpublished =     {\href        {https://gap-packages.github.io/MapClass}

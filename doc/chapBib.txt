@@ -3,8 +3,8 @@
   [1XReferences[101X
   
   [[20XBir75[120X]  [16XBirman,  J.  S.[116X, [17XBraids, links, and mapping class groups[117X, Princeton
-  University Press, Princeton, N. J. (1975), 1 pages, ((Based on lecture notes
-  by James Cannon)).
+  University  Press, Princeton, N. J. (1975), 1 pages, (Based on lecture notes
+  by James Cannon).
   
   [[20XBre00[120X]  [16XBreuer,  T.[116X,  [17XCharacters and automorphism groups of compact Riemann
   surfaces[117X, Cambridge University Press, [19X280[119X (2000).
@@ -15,7 +15,7 @@
   
   [[20XV\t96[120X]  [16XV{\"o}lklein,  H.[116X,  [17XGroups  as  Galois groups[117X, Cambridge University
   Press,  Cambridge  Studies  in  Advanced  Mathematics, [19X53[119X, Cambridge (1996),
-  xviii+248 pages, ((An introduction)).
+  xviii+248 pages, (An introduction).
   
   
   
