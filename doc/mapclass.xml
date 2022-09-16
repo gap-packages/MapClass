@@ -38,14 +38,14 @@ Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
         <#Include SYSTEM "intro.xml">
     </Body>
     <Appendix><Heading>Installation</Heading>
-        To Install the package place the "MapClass" folder into your GAP system's
-        'pkg' directory. If you do not have permission to modify the gap package
+        To install the package place the <F>MapClass</F> folder into your GAP system's
+        <F>pkg</F> directory. If you do not have permission to modify the gap package
         then the package can be included by appending a local directory to GAP's
-        root directory using the '-l' flag. For more information on GAP's root
-        directory process try '?GAP root' in a GAP session. Or see the online
-        help at https://www.gap-system.org/Manuals/doc/htm/ref/CHAP009.htm#SECT002
-
-        To Load the package simply type 'LoadPackage("mapclass");'. If the load
+        root directory using the <C>-l</C> flag. For more information on GAP's root
+        directory process try <C>?GAP root</C> in a GAP session. Or see the
+        <URL Text="online help">https://docs.gap-system.org/doc/ref/chap9.html#X7A4973627A5DB27D</URL>.
+        <P/>
+        To load the package simply type <C>LoadPackage("mapclass");</C>. If the load
         has been successful the package banner will be shown.
     </Appendix>
 
