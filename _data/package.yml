@@ -1,5 +1,6 @@
 name: MapClass
-version: 1.4.6
+version: "1.4.6"
+license: "GPL-2.0-or-later"
 date: 2022-09-17
 description: |
     A Package For Mapping Class Orbit Computation
