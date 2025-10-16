@@ -216,8 +216,22 @@ TestFile := "tst/testall.g",
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["braid orbit", "mapping class orbit", "Hurwitz loci"]
+Keywords := ["braid orbit", "mapping class orbit", "Hurwitz loci"],
+
+AutoDoc := rec(
+    entities := rec(
+        VERSION := ~.Version,
+        RELEASEYEAR := ~.Date{[7..10]},
+        RELEASEDATE := function(date)
+          local day, month, year, allMonths;
+          day := Int(date{[1,2]});
+          month := Int(date{[4,5]});
+          year := Int(date{[7..10]});
+          allMonths := [ "January", "February", "March", "April", "May", "June", "July",
+                         "August", "September", "October", "November", "December"];
+          return Concatenation(String(day)," ", allMonths[month], " ", String(year));
+        end(~.Date),
+    ),
+),
 
 ));
-
-
