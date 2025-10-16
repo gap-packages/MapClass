@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+<!DOCTYPE Book SYSTEM "gapdoc.dtd" [ <#Include SYSTEM "_entities.xml"> ] >
 
-<!-- $Id: gapdoc.xml,v 1.15 2008/06/17 14:22:25 gap Exp $ -->
 
 <!-- The documentation to the GAPDoc system. 
 Copyright 2000-2007 by Frank Lübeck and Max Neunhöffer
@@ -11,7 +10,8 @@ Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
 <Book Name="MapClass"> 
 
     <TitlePage>
-        <Title>MapClass</Title>
+        <Title>&MapClass;</Title>
+        <Version>Version &VERSION;</Version>
         <Author> Adam James
         </Author>
         <Author> Kay Magaard
@@ -21,7 +21,7 @@ Lehrstuhl D für Mathematik, RWTH Aachen, Germany -->
         </Author>
         <Author> Helmut Völklein
         </Author>
-        <Date>September 2018</Date>
+        <Date>&RELEASEDATE;</Date>
         <Copyright> &copyright; 2004-2018 by Adam James, Kay Magaard 
           Sergey Shpectorov, and Helmut Völklein <P/>
           MapClass is free software you can redistribute it and/or modify it
