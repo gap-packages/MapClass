@@ -18,10 +18,12 @@ InstallGlobalFunction(NumberGeneratingTuples,function(group,p,t,g)
   
   full:=[];
   sz:=Size(group);
-  cc:=ConjugacyClasses(group);
+  # class positions are passed to TotalNumberOfTuples, so they must refer to
+  # the classes of the character table, whose order may differ from the group's
+  ct:=CharacterTable(group);
+  cc:=ConjugacyClasses(ct);
   oc:=List(t,s->Filtered([1..Length(cc)],i->s in cc[i]));
    
-  ct:=CharacterTable(group);     
   str:=TotalNumberOfTuples(ct,g,List(oc,c->c[1]));
  
   Add(full,rec(gp:=group,sz:=sz,cc:=cc,oc:=oc,str:=str,pr:=0,nx:=0));
@@ -55,11 +57,11 @@ InstallGlobalFunction(NumberGeneratingTuples,function(group,p,t,g)
         fi;
       od;
       if not fl then 
-        mcc:=ConjugacyClasses(m);
+        ct:=CharacterTable(m);
+        mcc:=ConjugacyClasses(ct);
         moc:=List(oc,s-> Union(List(s, n-> Filtered([1..Length(mcc)],i ->
               Representative(mcc[i]) in cc[n]))));
         if not ([] in moc) then
-          ct:=CharacterTable(m);     
           str:=0;
           t:=List(tp,c->1);
           repeat
